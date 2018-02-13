@@ -89,6 +89,16 @@ def get_manufacturer_id(manufacturer):
  #print manufacturer_id
  return manufacturer_id
 
+def get_platform_id(platform):
+ url=url_base + 'api/dcim/platforms/?name=' + platform
+ rest_call = requests.get(url, headers=headers)
+ #pprint (rest_call.json())
+ #if rest_call.status_code != 200:
+ #    print 'failed to get the id of the platform ' + platform
+ platform_id = rest_call.json()['results'][0]['id']
+ #print platform_id
+ return platform_id
+
 def create_sites():
  url=url_base + 'api/dcim/sites/'
  tenant_id=get_tenant_id(my_variables_in_yaml['tenants'][0])
@@ -104,6 +114,16 @@ def create_sites():
          print item + ' site created'
      else:
          print 'failed to create site ' + item
+
+def get_site_id(site):
+ url=url_base + 'api/dcim/sites/?name=' + site
+ rest_call = requests.get(url, headers=headers)
+ #pprint (rest_call.json())
+ #if rest_call.status_code != 200:
+ #    print 'failed to get the id of the site ' + site
+ site_id = rest_call.json()['results'][0]['id']
+ #print site_id
+ return site_id
 
 def device_types():
     url=url_base + 'api/dcim/device-types/'
@@ -175,7 +195,6 @@ def create_power_port_templates(model):
         rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
         #pprint (rest_call.json())
 
-
 def create_interface_templates_for_qfx10002_36q():
     url=url_base + 'api/dcim/interface-templates/'
     for item in range (0, 31): 
@@ -196,7 +215,7 @@ def create_interface_templates_for_qfx10002_36q():
     rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
     #pprint (rest_call.json())
 
-def prefix_roles():
+def create_prefix_roles():
     url=url_base + 'api/ipam/roles/'
     for item in my_variables_in_yaml['prefix_roles']:
      payload={
@@ -220,14 +239,52 @@ def get_prefix_role_id(prefix_role):
     #print device_type_id
     return device_type_id
 
+def create_prefixes():
+    url=url_base + 'api/ipam/prefixes/'
+    for item in my_variables_in_yaml['prefixes']:
+     payload={
+           "prefix": item['prefix'],
+           "tenant": get_tenant_id(my_variables_in_yaml['tenants'][0]),
+           "status": 1,
+           "role": get_prefix_role_id((my_variables_in_yaml['prefix_roles'][0]))
+     }
+     rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+     #pprint (rest_call.json())
+     if rest_call.status_code == 201:
+         print item['prefix'] + ' prefix created'
+     else:
+         print 'failed to create prefix ' + item['prefix']
+
+def create_devices():
+    url=url_base + 'api/dcim/devices/'
+    for item in my_variables_in_yaml['devices']:
+     payload={
+           "name": item['name'],
+           "device_type": get_device_type_id(item['device_type']),
+           "status": 1,
+           "device_role": get_device_role_id(item['device_role']),
+           "platform": get_platform_id('Juniper Junos'),
+           "site": get_site_id(item['site']),
+           "tenant": get_tenant_id(my_variables_in_yaml['tenants'][0])
+     }
+     rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+     #pprint (rest_call.json())
+     if rest_call.status_code == 201:
+         print item['name'] + ' device created'
+     else:
+         print 'failed to create device ' + item['name']
+
 
 ######################################################
 # this block is the Netbox configuration using REST calls
 ######################################################
 
 my_variables_in_yaml=import_variables_from_file()
+
 url_base = 'http://' + my_variables_in_yaml['ip'] + '/'
+
 token = my_variables_in_yaml['token']
+
 headers={
     'Authorization': 'Token ' + token,
     'Content-Type': 'application/json',
@@ -242,6 +299,8 @@ create_tenants()
 #get_tenant_id(my_variables_in_yaml['tenants'][0])
 
 create_sites()
+#for item in my_variables_in_yaml['sites']:
+#    get_site_id(item)
 
 device_types()
 #get_device_type_id('qfx10002-36q')
@@ -255,8 +314,13 @@ create_interface_templates_for_qfx10002_36q()
 for item in ['qfx5100-48s-6q','qfx10002-36q']:
     create_power_port_templates(item)
 
-
-prefix_roles()
+create_prefix_roles()
 
 for item in my_variables_in_yaml['prefix_roles']:
    get_prefix_role_id(item)
+
+create_prefixes()
+
+#get_platform_id('Juniper Junos')
+
+create_devices()
