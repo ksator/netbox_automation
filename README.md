@@ -6,7 +6,7 @@ code https://github.com/digitalocean/netbox
 
 ## About this repo
 
-This repository uses Python scripts and YAML variables to: 
+This repository uses Python to: 
 
 - configure an existing Netbox setup
 - get data from Netbox and generate ansible inventory
