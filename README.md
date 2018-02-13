@@ -10,7 +10,7 @@ This repository uses Python to:
 
 - configure an existing Netbox setup
 - get data from Netbox and generate ansible inventory
-- get data from Netbox generate yaml variables for Jinja templates
+- get data from Netbox and generate yaml variables for Jinja templates
 
 This repository doesnt install Netbox. You still need to install Netbox yourself.
 
