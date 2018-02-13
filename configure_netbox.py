@@ -52,7 +52,7 @@ def get_device_role_id(role):
  #if rest_call.status_code != 200:
  #    print 'failed to get the id of the role ' + role
  role_id = rest_call.json()['results'][0]['id']
- print role_id
+ #print role_id
  return role_id
 
 def create_tenants():
@@ -76,7 +76,7 @@ def get_tenant_id(tenant):
  #if rest_call.status_code != 200:
  #    print 'failed to get the id of the tenant ' + tenant
  tenant_id = rest_call.json()['results'][0]['id']
- print tenant_id
+ #print tenant_id
  return tenant_id
 
 def get_manufacturer_id(manufacturer):
@@ -86,7 +86,7 @@ def get_manufacturer_id(manufacturer):
  #if rest_call.status_code != 200:
  #    print 'failed to get the id of the manufacturer ' + manufacturer
  manufacturer_id = rest_call.json()['results'][0]['id']
- print manufacturer_id
+ #print manufacturer_id
  return manufacturer_id
 
 def create_sites():
@@ -133,8 +133,59 @@ def get_device_type_id(model):
     #if rest_call.status_code != 200:
     #    print 'failed to get the id of the device_type ' + model
     device_type_id = rest_call.json()['results'][0]['id']
-    print device_type_id
+    #print device_type_id
     return device_type_id
+
+def create_interface_templates_for_qfx5100_48s_6q():
+    url=url_base + 'api/dcim/interface-templates/'
+    for item in range (0, 47): 
+        payload={
+            "device_type": get_device_type_id('qfx5100-48s-6q'),
+            "name": "xe-0/0/" + str(item),
+            "form_factor": 1200,
+            "mgmt_only": False
+        }
+        rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+        #pprint (rest_call.json())
+    for item in range (48, 53): 
+        payload={
+            "device_type": get_device_type_id('qfx5100-48s-6q'),
+            "name": "et-0/0/" + str(item),
+            "form_factor": 1400,
+            "mgmt_only": False
+        }
+        rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+        #pprint (rest_call.json())
+    payload={
+        "device_type": get_device_type_id('qfx5100-48s-6q'),
+        "name": "vme0",
+        "form_factor": 1000,
+        "mgmt_only": True
+    }
+    rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+    #pprint (rest_call.json())
+
+
+def create_interface_templates_for_qfx10002_36q():
+    url=url_base + 'api/dcim/interface-templates/'
+    for item in range (0, 31): 
+        payload={
+            "device_type": get_device_type_id('qfx10002-36q'),
+            "name": "et-0/0/" + str(item),
+            "form_factor": 1400,
+            "mgmt_only": False
+        }
+        rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+        #pprint (rest_call.json())
+    payload={
+        "device_type": get_device_type_id('qfx10002-36q'),
+        "name": "em0",
+        "form_factor": 1000,
+        "mgmt_only": True
+    }
+    rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+    #pprint (rest_call.json())
+
 
 
 ######################################################
@@ -165,3 +216,5 @@ device_types()
 #for item in ['qfx5100-48s-6q','qfx10002-36q']:
 #    get_device_type_id(item)
 
+create_interface_templates_for_qfx5100_48s_6q()
+create_interface_templates_for_qfx10002_36q()
