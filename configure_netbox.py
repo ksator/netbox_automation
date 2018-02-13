@@ -210,6 +210,15 @@ def prefix_roles():
      else:
          print 'failed to create prefix roles ' + item
 
+def get_prefix_role_id(prefix_role):
+    url=url_base + 'api/ipam/roles/?name=' + prefix_role
+    rest_call = requests.get(url, headers=headers)
+    #pprint (rest_call.json())
+    #if rest_call.status_code != 200:
+    #    print 'failed to get the id of the prefix_role ' + prefix_role
+    device_type_id = rest_call.json()['results'][0]['id']
+    #print device_type_id
+    return device_type_id
 
 
 ######################################################
@@ -249,3 +258,5 @@ for item in ['qfx5100-48s-6q','qfx10002-36q']:
 
 prefix_roles()
 
+for item in my_variables_in_yaml['prefix_roles']:
+   get_prefix_role_id(item)

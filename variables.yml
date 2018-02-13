@@ -29,7 +29,7 @@ prefix_roles:
     - out_of_band_management
     - devices_interconnection
 
-# prefixes and prefix roles you want to use. 
+# prefixes you want to create. 
 # These prefixes will be assign to the tenant.
 prefixes:
     - prefix: 10.0.2.0/24
