@@ -1,9 +1,0 @@
----
-# Edit this file to define what to configure in Netbox
-
-# netbox ip @
-ip: 192.168.233.148
-
-# netbox device-roles you want to create
-device-roles: - spine
-              - leave   

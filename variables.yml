@@ -1,0 +1,13 @@
+---
+# Edit this file to define what to configure in Netbox
+
+# netbox ip @
+ip: 192.168.233.148
+
+# netbox user token
+token: 'b1b0f72bed6946d352b78781030e8d626f5e8c28'
+
+# netbox device-roles you want to create
+device-roles: 
+              - "spine_switch"
+              - "leaf_switch"   

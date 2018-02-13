@@ -29,7 +29,7 @@ def import_variables_from_file():
  return my_variables_in_yaml
 
 
-def create_device-roles():
+def create_device_roles():
  url=url_base + 'api/dcim/device-roles/'
  for item in my_variables_in_yaml['device-roles']:
      payload={
@@ -40,26 +40,26 @@ def create_device-roles():
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
      #pprint (rest_call.json())
      if rest_call.status_code == 201:
-         print my_variables_in_yaml['device-roles'][item] + ' device-roles created
+         print item + ' device-roles created'
      else:
-         print 'failed to create device-roles ' + my_variables_in_yaml['device-roles'][item]
-     
+         print 'failed to create device-roles ' + item
+
 
 ######################################################
 # this block is the Netbox configuration using REST calls
 ######################################################
 my_variables_in_yaml=import_variables_from_file()
 
-url_base = 'http://' + my_variables_in_yaml['ip']
+url_base = 'http://' + my_variables_in_yaml['ip'] + '/'
 
 token = my_variables_in_yaml['token']
 
 headers={
     'Authorization': 'Token ' + token,
-    'Content-Type': 'application/json', 
+    'Content-Type': 'application/json',
     'Accept': 'application/json'
 }
 
-create_device-roles()
+create_device_roles()
 
 
