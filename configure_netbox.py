@@ -196,6 +196,20 @@ def create_interface_templates_for_qfx10002_36q():
     rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
     #pprint (rest_call.json())
 
+def prefix_roles():
+    url=url_base + 'api/ipam/roles/'
+    for item in my_variables_in_yaml['prefix_roles']:
+     payload={
+         "name": item,
+         "slug": item
+     }
+     rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+     #pprint (rest_call.json())
+     if rest_call.status_code == 201:
+         print item + ' prefix role created'
+     else:
+         print 'failed to create prefix roles ' + item
+
 
 
 ######################################################
@@ -233,5 +247,5 @@ for item in ['qfx5100-48s-6q','qfx10002-36q']:
     create_power_port_templates(item)
 
 
-
+prefix_roles()
 
