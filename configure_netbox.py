@@ -108,6 +108,28 @@ def create_sites():
          print 'failed to create site ' + item
 
 
+def device_types():
+    url=url_base + 'api/dcim/device-types/'
+    Juniper_id=get_manufacturer_id('Juniper')
+    device_types_list=[{"manufacturer": Juniper_id, "model": "qfx5100-48s-6q", "slug": "qfx5100-48s-6q", "part_number": "650-049938", "u_height": 1, "is_full_depth": True, "is_network_device": True},{ "manufacturer": Juniper_id, "model": "qfx10002-36q", "slug": "qfx10002-36q", "part_number": "750-059497", "u_height": 2, "is_full_depth": True, "is_network_device": True}]
+    for item in device_types_list:
+        payload={
+        "manufacturer": item['manufacturer'],
+        "model": item['model'],
+        "slug": item['slug'],
+        "part_number": item['part_number'],
+        "u_height": item['u_height'],
+        "is_full_depth": item ["is_full_depth"],
+        "is_network_device": item["is_network_device"]
+        }
+        rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+        #pprint (rest_call.json())
+        if rest_call.status_code == 201:
+            print item['model'] + ' device type created'
+        else:
+            print 'failed to create device type ' + item['model']
+
+
 
 ######################################################
 # this block is the Netbox configuration using REST calls
@@ -127,54 +149,6 @@ headers={
 }
 
 
-######################################################
-# this block configures netbox device types
-######################################################
-
-url=url_base + 'api/dcim/device-types/'
-
-Juniper_id=get_manufacturer_id('Juniper')
-
-# create qfx5100-48s-6q device type
-payload={
-    "manufacturer": Juniper_id,
-    "model": "qfx5100-48s-6q1",
-    "slug": "qfx5100-48s-6q1",
-    "part_number": "650-049938",
-    "u_height": 1,
-    "is_full_depth": True,
-    "is_network_device": True,
-}
-rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
-#pprint (rest_call.json())
-if rest_call.status_code == 201:
-    print 'qfx5100-48s-6q device type created'
-else:
-    print 'failed to create qfx5100-48s-6q device type'
-
-
-# create QFX10002-36Q device type 
-payload={
-    "manufacturer": Juniper_id,
-    "model": "qfx10002-36q",
-    "slug": "qfx10002-36q",
-    "part_number": "750-059497",
-    "u_height": 2,
-    "is_full_depth": True,
-    "is_network_device": True,
-}
-rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
-#pprint (rest_call.json())
-if rest_call.status_code == 201:
-    print 'qfx10002-36q device type created'
-else:
-    print 'failed to create qfx10002-36q device type'
-
-
-######################################################
-# this block call the functions defined above
-######################################################
-
 create_device_roles()
 
 for item in my_variables_in_yaml['device-roles']: 
@@ -186,3 +160,4 @@ get_tenant_id(my_variables_in_yaml['tenants'][0])
 
 create_sites()
 
+device_types()
