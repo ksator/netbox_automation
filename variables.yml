@@ -1,5 +1,5 @@
 ---
-# Edit this file to define what to configure in Netbox
+# Edit this file to define the details to configure on Netbox
 
 # netbox server ip @
 ip: 192.168.233.148
@@ -24,4 +24,19 @@ device-roles:
 # device-types qfx5100-48s-6q and qfx10002-36q will be automatically created. 
 # interface_templates and power_port_templates will be automatically created for device-types qfx5100-48s-6q and qfx10002-36q
  
+# prefixe roles you want to create
+prefix_roles: 
+    - out_of_band_management
+    - devices_interconnection
+
+# prefixes and prefix roles you want to use. 
+# These prefixes will be assign to the tenant.
+prefixes:
+    - prefix: 10.0.2.0/24
+      role: devices_interconnection
+    - prefix: 172.25.90.0/24
+      role: out_of_band_management
+    
+
+
 
