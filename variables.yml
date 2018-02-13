@@ -20,3 +20,8 @@ sites:
 device-roles: 
     - "spine_switch"
     - "leaf_switch"   
+
+# device-types qfx5100-48s-6q and qfx10002-36q will be automatically created. 
+# interface_templates and power_port_templates will be automatically created for device-types qfx5100-48s-6q and qfx10002-36q
+ 
+

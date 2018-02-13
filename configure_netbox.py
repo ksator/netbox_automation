@@ -165,16 +165,15 @@ def create_interface_templates_for_qfx5100_48s_6q():
     rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
     #pprint (rest_call.json())
 
-def create_power_port_templates_for_qfx5100_48s_6q():
+def create_power_port_templates(model):
      url=url_base + 'api/dcim/power-port-templates/'
      for item in ['Power Supply 0','Power Supply 1']:
         payload={
-            "device_type": get_device_type_id('qfx5100-48s-6q'),
+            "device_type": get_device_type_id(model),
             "name": item
         }
         rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
         #pprint (rest_call.json())
-
 
 
 def create_interface_templates_for_qfx10002_36q():
@@ -228,7 +227,11 @@ device_types()
 #    get_device_type_id(item)
 
 create_interface_templates_for_qfx5100_48s_6q()
-create_power_port_templates_for_qfx5100_48s_6q()
-
 create_interface_templates_for_qfx10002_36q()
+
+for item in ['qfx5100-48s-6q','qfx10002-36q']:
+    create_power_port_templates(item)
+
+
+
 
