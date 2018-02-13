@@ -1,9 +1,11 @@
 ###################################################
 # This script takes the variables defined in the file variables.yml and make rest calls to Netbox to configure it.
 ###################################################
+
 ###################################################
 # usage: python configure_netbox.py
 ###################################################
+
 ###################################################
 # This block indicates the various imports
 ###################################################
@@ -18,6 +20,7 @@ import time
 ##################################################
 # This block defines the functions we will use
 ###################################################
+
 def import_variables_from_file():
  my_variables_file=open('variables.yml', 'r')
  my_variables_in_string=my_variables_file.read()
@@ -78,6 +81,16 @@ def get_tenant_id(tenant):
  print tenant_id
  return tenant_id
 
+def get_manufacturer_id(manufacturer):
+ url=url_base + 'api/dcim/manufacturers/?name=' + manufacturer
+ rest_call = requests.get(url, headers=headers)
+ #pprint (rest_call.json())
+ #if rest_call.status_code != 200:
+ #    print 'failed to get the id of the manufacturer ' + manufacturer
+ manufacturer_id = rest_call.json()['results'][0]['id']
+ print manufacturer_id
+ return manufacturer_id
+
 def create_sites():
  url=url_base + 'api/dcim/sites/'
  tenant_id=get_tenant_id(my_variables_in_yaml['tenants'][0])
@@ -120,10 +133,11 @@ headers={
 
 url=url_base + 'api/dcim/device-types/'
 
+Juniper_id=get_manufacturer_id('Juniper')
 
 # create qfx5100-48s-6q device type
 payload={
-    "manufacturer": 5,
+    "manufacturer": Juniper_id,
     "model": "qfx5100-48s-6q1",
     "slug": "qfx5100-48s-6q1",
     "part_number": "650-049938",
@@ -141,7 +155,7 @@ else:
 
 # create QFX10002-36Q device type 
 payload={
-    "manufacturer": 5,
+    "manufacturer": Juniper_id,
     "model": "qfx10002-36q",
     "slug": "qfx10002-36q",
     "part_number": "750-059497",
