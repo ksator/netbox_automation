@@ -41,9 +41,9 @@ def create_device_roles():
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
      #pprint (rest_call.json())
      if rest_call.status_code == 201:
-         print item + ' device-roles created'
+         print 'device role ' + item + ' successfully created'
      else:
-         print 'failed to create device-roles ' + item
+         print 'failed to create device role ' + item
 
 def get_device_role_id(role):
  url=url_base + 'api/dcim/device-roles/?name=' + role
@@ -65,7 +65,7 @@ def create_tenants():
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
      #pprint (rest_call.json())
      if rest_call.status_code == 201:
-         print item + ' tenant created'
+         print 'tenant ' + item + ' successfully created'
      else:
          print 'failed to create tenant ' + item
 
@@ -99,6 +99,21 @@ def get_platform_id(platform):
  #print platform_id
  return platform_id
 
+def create_platform():
+ url=url_base + 'api/dcim/platforms/'
+ payload={
+     "napalm_driver": "junos",
+     'name': 'junos',
+     'rpc_client': 'juniper-junos',
+     'slug': 'junos'
+ }
+ rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+ #pprint (rest_call.json())
+ if rest_call.status_code == 201:
+     print 'platform junos successfully created'
+ else:
+     print 'failed to create platform junos'
+
 def create_sites():
  url=url_base + 'api/dcim/sites/'
  tenant_id=get_tenant_id(my_variables_in_yaml['tenants'][0])
@@ -111,7 +126,7 @@ def create_sites():
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
      #pprint (rest_call.json())
      if rest_call.status_code == 201:
-         print item + ' site created'
+         print 'site ' + item + ' successfully created'
      else:
          print 'failed to create site ' + item
 
@@ -142,7 +157,7 @@ def device_types():
         rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
         #pprint (rest_call.json())
         if rest_call.status_code == 201:
-            print item['model'] + ' device type created'
+            print 'device type ' + item['model'] + ' successfully created'
         else:
             print 'failed to create device type ' + item['model']
 
@@ -225,9 +240,9 @@ def create_prefix_roles():
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
      #pprint (rest_call.json())
      if rest_call.status_code == 201:
-         print item + ' prefix role created'
+         print 'prefix role ' + item + ' successfully created'
      else:
-         print 'failed to create prefix roles ' + item
+         print 'failed to create prefix role ' + item
 
 def get_prefix_role_id(prefix_role):
     url=url_base + 'api/ipam/roles/?name=' + prefix_role
@@ -251,7 +266,7 @@ def create_prefixes():
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
      #pprint (rest_call.json())
      if rest_call.status_code == 201:
-         print item['prefix'] + ' prefix created'
+         print 'prefix ' + item['prefix'] + ' successfully created'
      else:
          print 'failed to create prefix ' + item['prefix']
 
@@ -263,16 +278,31 @@ def create_devices():
            "device_type": get_device_type_id(item['device_type']),
            "status": 1,
            "device_role": get_device_role_id(item['device_role']),
-           "platform": get_platform_id('Juniper Junos'),
+           "platform": get_platform_id('junos'),
            "site": get_site_id(item['site']),
            "tenant": get_tenant_id(my_variables_in_yaml['tenants'][0])
      }
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
      #pprint (rest_call.json())
      if rest_call.status_code == 201:
-         print item['name'] + ' device created'
+         print 'device ' + item['name'] + ' successfully created'
      else:
          print 'failed to create device ' + item['name']
+
+def create_ip_addresses():
+    url=url_base + 'api/ipam/ip-addresses/'
+    for item in my_variables_in_yaml['addresses']:
+     payload={
+           "status": 1,
+           "address": item['ip'],
+           "tenant": get_tenant_id(my_variables_in_yaml['tenants'][0])
+     }
+     rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+     #pprint (rest_call.json())
+     if rest_call.status_code == 201:
+         print 'address ip ' + item['ip'] + ' successfully created'
+     else:
+         print 'failed to create ip address ' + item['ip']
 
 
 ######################################################
@@ -322,5 +352,11 @@ for item in my_variables_in_yaml['prefix_roles']:
 create_prefixes()
 
 #get_platform_id('Juniper Junos')
+#get_platform_id('junos')
+
+create_platform()
 
 create_devices()
+
+create_ip_addresses()
+

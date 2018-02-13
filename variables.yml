@@ -27,6 +27,8 @@ device-roles:
 
 # power_port_templates will be automatically created for device-types qfx5100-48s-6q and qfx10002-36q
 
+# Juniper Junos platform will be automatically updated with a junos  napalm_driver
+
 # prefixe roles you want to create
 prefix_roles: 
     - out_of_band_management
@@ -40,7 +42,6 @@ prefixes:
     - prefix: 172.25.190.0/24
       role: out_of_band_management
     
-
 # devices you want to create. the devices are assigned to the tenant.
 devices: 
     - name: QFX5100-183
@@ -67,3 +68,15 @@ devices:
       device_type: qfx10002-36q
       device_role: spine_switch
       site: dc1
+
+# ip addresses you want to create. the IP addresses are assigned to the tenant.
+addresses: 
+    - ip: 172.25.90.183
+      device: QFX5100-183
+      interface: vme0
+      mgmt_only: True
+    - ip: 172.25.90.178
+      device: QFX10K2-178
+      interface: em0
+      mgmt_only: True
+
