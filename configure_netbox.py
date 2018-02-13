@@ -113,11 +113,12 @@ headers={
 
 create_device_roles()
 
-get_device_role_id('spine_switch')
+for item in my_variables_in_yaml['device-roles']: 
+    get_device_role_id(item)
 
 create_tenants()
 
-get_tenant_id('evpn-vxlan-demo')
+get_tenant_id(my_variables_in_yaml['tenants'][0])
 
 create_sites()
 
