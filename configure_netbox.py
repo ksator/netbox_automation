@@ -16,7 +16,6 @@ from pprint import pprint
 import yaml
 import time
 
-
 ##################################################
 # This block defines the functions we will use
 ###################################################
@@ -30,7 +29,6 @@ def import_variables_from_file():
  # print my_variables_in_yaml['ip']
  my_variables_file.close()
  return my_variables_in_yaml
-
 
 def create_device_roles():
  url=url_base + 'api/dcim/device-roles/'
@@ -143,37 +141,27 @@ def get_device_type_id(model):
 # this block is the Netbox configuration using REST calls
 ######################################################
 
-
 my_variables_in_yaml=import_variables_from_file()
-
 url_base = 'http://' + my_variables_in_yaml['ip'] + '/'
-
 token = my_variables_in_yaml['token']
-
 headers={
     'Authorization': 'Token ' + token,
     'Content-Type': 'application/json',
     'Accept': 'application/json'
 }
 
-
 create_device_roles()
-
-for item in my_variables_in_yaml['device-roles']: 
-    get_device_role_id(item)
+#for item in my_variables_in_yaml['device-roles']: 
+#    get_device_role_id(item)
 
 create_tenants()
-
-get_tenant_id(my_variables_in_yaml['tenants'][0])
+#get_tenant_id(my_variables_in_yaml['tenants'][0])
 
 create_sites()
 
 device_types()
-
-
-get_device_type_id('qfx10002-36q')
-get_device_type_id('qfx5100-48s-6q')
-
-for item in ['qfx5100-48s-6q','qfx10002-36q']:
-    get_device_type_id(item)
+#get_device_type_id('qfx10002-36q')
+#get_device_type_id('qfx5100-48s-6q')
+#for item in ['qfx5100-48s-6q','qfx10002-36q']:
+#    get_device_type_id(item)
 
