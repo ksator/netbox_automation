@@ -99,6 +99,8 @@ def create_sites():
 ######################################################
 # this block is the Netbox configuration using REST calls
 ######################################################
+
+
 my_variables_in_yaml=import_variables_from_file()
 
 url_base = 'http://' + my_variables_in_yaml['ip'] + '/'
@@ -110,6 +112,54 @@ headers={
     'Content-Type': 'application/json',
     'Accept': 'application/json'
 }
+
+
+######################################################
+# this block configures netbox device types
+######################################################
+
+url=url_base + 'api/dcim/device-types/'
+
+
+# create qfx5100-48s-6q device type
+payload={
+    "manufacturer": 5,
+    "model": "qfx5100-48s-6q1",
+    "slug": "qfx5100-48s-6q1",
+    "part_number": "650-049938",
+    "u_height": 1,
+    "is_full_depth": True,
+    "is_network_device": True,
+}
+rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+#pprint (rest_call.json())
+if rest_call.status_code == 201:
+    print 'qfx5100-48s-6q device type created'
+else:
+    print 'failed to create qfx5100-48s-6q device type'
+
+
+# create QFX10002-36Q device type 
+payload={
+    "manufacturer": 5,
+    "model": "qfx10002-36q",
+    "slug": "qfx10002-36q",
+    "part_number": "750-059497",
+    "u_height": 2,
+    "is_full_depth": True,
+    "is_network_device": True,
+}
+rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+#pprint (rest_call.json())
+if rest_call.status_code == 201:
+    print 'qfx10002-36q device type created'
+else:
+    print 'failed to create qfx10002-36q device type'
+
+
+######################################################
+# this block call the functions defined above
+######################################################
 
 create_device_roles()
 
