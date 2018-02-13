@@ -107,7 +107,6 @@ def create_sites():
      else:
          print 'failed to create site ' + item
 
-
 def device_types():
     url=url_base + 'api/dcim/device-types/'
     Juniper_id=get_manufacturer_id('Juniper')
@@ -129,6 +128,15 @@ def device_types():
         else:
             print 'failed to create device type ' + item['model']
 
+def get_device_type_id(model):
+    url=url_base + 'api/dcim/device-types/?model=' + model
+    rest_call = requests.get(url, headers=headers)
+    #pprint (rest_call.json())
+    #if rest_call.status_code != 200:
+    #    print 'failed to get the id of the device_type ' + model
+    device_type_id = rest_call.json()['results'][0]['id']
+    print device_type_id
+    return device_type_id
 
 
 ######################################################
@@ -161,3 +169,11 @@ get_tenant_id(my_variables_in_yaml['tenants'][0])
 create_sites()
 
 device_types()
+
+
+get_device_type_id('qfx10002-36q')
+get_device_type_id('qfx5100-48s-6q')
+
+for item in ['qfx5100-48s-6q','qfx10002-36q']:
+    get_device_type_id(item)
+
