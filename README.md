@@ -186,9 +186,39 @@ management_addresses:
 
 ```
 ## Configure Netbox with automation
-
+```
+$ python configure_netbox.py 
+device role spine_switch successfully created
+device role leaf_switch successfully created
+tenant evpn-vxlan-demo successfully created
+site dc1 successfully created
+site dc2 successfully created
+device type qfx5100-48s-6q successfully created
+device type qfx10002-36q successfully created
+prefix role out_of_band_management successfully created
+prefix role devices_interconnection successfully created
+prefix 10.0.102.0/24 successfully created
+prefix 172.25.190.0/24 successfully created
+platform junos successfully created
+device QFX5100-183 successfully created
+device QFX5100-186 successfully created
+device QFX10K2-178 successfully created
+device QFX10K2-180 successfully created
+device QFX10K2-181 successfully created
+device QFX10K2-174 successfully created
+device QFX10K2-175 successfully created
+address ip 172.25.90.183 successfully created
+address ip 172.25.90.186 successfully created
+address ip 172.25.90.178 successfully created
+address ip 172.25.90.174 successfully created
+address ip 172.25.90.175 successfully created
+address ip 172.25.90.180 successfully created
+address ip 172.25.90.181 successfully created
+```
 ## Delete Netbox configuration with automation
-
+```
+$ python delete_netbox_configuration.py 
+```
 
 ## Looking for more automation solutions
 
