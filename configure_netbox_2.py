@@ -320,7 +320,7 @@ def create_management_ip_address():
       pprint (rest_call.json())
 
 def get_address_id(device, interface_id):
-    url=url_base + 'api/ipam/ip-addresses/?device=' + device + ' &interface_id=' + str(interface_id)
+    url=url_base + 'api/ipam/ip-addresses/?device=' + device + '&interface_id=' + str(interface_id)
     rest_call = requests.get(url, headers=headers)
     pprint (rest_call.json())
     #if rest_call.status_code != 200:
