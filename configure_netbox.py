@@ -317,7 +317,7 @@ def get_device_details(device):
 
 def create_ip_addresses():
     url=url_base + 'api/ipam/ip-addresses/'
-    for item in my_variables_in_yaml['addresses']:
+    for item in my_variables_in_yaml['management_addresses']:
      device=item['device']
      interface=item['interface']
      payload={
@@ -334,7 +334,7 @@ def create_ip_addresses():
          print 'failed to create ip address ' + item['ip']
 
 def create_management_ip_address():
-    for item in my_variables_in_yaml['addresses']:
+    for item in my_variables_in_yaml['management_addresses']:
      if item['mgmt_only']==True:
       device_id=get_device_id(item['device'])
       interface_id=get_interface_id(item['interface'], item['device'])

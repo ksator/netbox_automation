@@ -69,8 +69,8 @@ devices:
       device_role: spine_switch
       site: dc1
 
-# ip addresses you want to create. the IP addresses are assigned to the tenant.
-addresses: 
+# management ip addresses you want to create. the IP addresses are assigned to the tenant.
+management_addresses: 
     - ip: 172.25.90.183
       device: QFX5100-183
       interface: vme0
