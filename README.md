@@ -32,7 +32,12 @@ The steps are:
 - Execute the script [**configure_netbox.py**](configure_netbox.py): It uses the variables defined in the file [**variables.yml**](variables.yml) and configure Netbox    
 
 ## Netbox Installation
-See the [**installation guide**](http://netbox.readthedocs.io/en/stable/)
+See the [**installation guide**](http://netbox.readthedocs.io/en/stable/)  
+
+Once netbox is installed, you can use it: 
+- netbox GUI http://your_netbox_server
+- netbox API http://your_netbox_server/api/
+- netbox API doc http://your_netbox_server/api/docs/
 
 ## install the requirements to use the automation content hosted in this repository  
 The python scripts  hosted in this repository use the library **requests** to makes REST calls to Netbox.   
