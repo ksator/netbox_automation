@@ -5,7 +5,7 @@
 [**Netbox Installation**](README.md#netbox-installation)  
 [**install the requirements to use the automation content hosted in this repository**](README.md#install-the-requirements-to-use-the-automation-content-hosted-in-this-repository)  
 [**clone this repository**](README.md#clone-this-repository)  
-[**Looking for more Junos automation solutions**](README.md#looking-for-more-junos-automation-solutions)  
+[**Looking for Junos automation solutions**](README.md#looking-for-more-automation-solutions)  
 
 
 ## About Netbox
