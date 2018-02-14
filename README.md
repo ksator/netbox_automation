@@ -33,6 +33,7 @@ The steps are:
 
 ## Netbox Installation
 See the [**installation guide**](http://netbox.readthedocs.io/en/stable/)  
+This repository has been tested with Netbox version v2.2.9  
 
 Once netbox is installed, you can use it: 
 - netbox GUI http://your_netbox_server
