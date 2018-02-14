@@ -24,6 +24,11 @@ This repository uses Python to:
 
 This repository doesnt install Netbox. You still need to install Netbox yourself.
 
+This repository has been tested using: 
+- Ubuntu 16.04
+- Python 2.7
+- Netbox v2.2.9
+    
 ## How to use this repo
 
 The steps are:  
