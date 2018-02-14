@@ -315,9 +315,9 @@ def get_device_details(device):
   #print payload
   return payload
 
-def create_ip_addresses():
+def create_ip_addresses(addresses):
     url=url_base + 'api/ipam/ip-addresses/'
-    for item in my_variables_in_yaml['management_addresses']:
+    for item in my_variables_in_yaml[addresses]:
      device=item['device']
      interface=item['interface']
      payload={
@@ -327,13 +327,12 @@ def create_ip_addresses():
            "interface": get_interface_id(interface, device)
      }
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
-     #pprint (rest_call.json())
      if rest_call.status_code == 201:
          print 'address ip ' + item['ip'] + ' successfully created'
      else:
          print 'failed to create ip address ' + item['ip']
 
-def create_management_ip_address():
+def enable_management_ip_address():
     for item in my_variables_in_yaml['management_addresses']:
      if item['mgmt_only']==True:
       device_id=get_device_id(item['device'])
@@ -429,8 +428,10 @@ create_platform()
 
 create_devices()
 
-create_ip_addresses()
+create_ip_addresses('management_addresses')
 
-create_management_ip_address()
+enable_management_ip_address()
 
 #get_device_details('QFX5100-183')
+
+create_ip_addresses('ip_addresses')

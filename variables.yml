@@ -34,9 +34,9 @@ prefix_roles:
 # prefixes you want to create. 
 # These prefixes are assigned to the tenant.
 prefixes:
-    - prefix: 10.0.102.0/24
+    - prefix: 10.0.2.0/24
       role: devices_interconnection
-    - prefix: 172.25.190.0/24
+    - prefix: 172.25.90.0/24
       role: out_of_band_management
     
 # devices you want to create. the devices are assigned to the tenant.
@@ -100,3 +100,24 @@ management_addresses:
       device: QFX10K2-181
       interface: em0
       mgmt_only: True
+
+# Other ip addresses you want to create. the IP addresses are assigned to the tenant.
+ip_addresses:
+    - ip: 10.0.2.13/31
+      device: QFX10K2-180
+      interface: et-0/0/0
+    - ip: 10.0.2.23/31
+      device: QFX10K2-180
+      interface: et-0/0/1
+    - ip: 10.0.2.15/31
+      device: QFX10K2-181
+      interface: et-0/0/0
+    - ip: 10.0.2.25/31
+      device: QFX10K2-181
+      interface: et-0/0/1
+    - ip: 10.0.2.9/31
+      device: QFX10K2-178
+      interface: et-0/0/0
+    - ip: 10.0.2.19/31
+      device: QFX10K2-178
+      interface: et-0/0/1
