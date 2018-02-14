@@ -3,6 +3,8 @@
 [**About this repo**](README.md#about-this-repo)  
 [**How to use this repo**](README.md#how-to-use-this-repo)    
 [**Netbox Installation**](README.md#netbox-installation)  
+[**install the requirements to use the automation content hosted in this repository**](README.md#install-the-requirements-to-use-the- automation-content-hosted-in-this-repository)
+[**clone this repository**](README.md#clone-this-repository)
 
 ## About Netbox
 
@@ -27,9 +29,26 @@ The steps are:
 - Install the requirements to use the python scripts hosted in this repository  
 - Clone this repository
 - Edit the file [**variables.yml**](variables.yml) to indicate what you want to configure on Netbox
-- Execute the script [**configure_netbox.py**](configure_netbox.py): It uses the variables you defined in the file [**variables.yml**](variables.yml) and configure Netbox    
+- Execute the script [**configure_netbox.py**](configure_netbox.py): It uses the variables defined in the file [**variables.yml**](variables.yml) and configure Netbox    
 
 ## Netbox Installation
-http://netbox.readthedocs.io/en/stable/
+See the [installation guide](http://netbox.readthedocs.io/en/stable/)
+
+## install the requirements to use the automation content hosted in this repository  
+The python scripts  hosted in this repository use the library **requests** to makes REST calls to Netbox.   
+Run these commands on your laptop:
+```
+sudo -s
+pip install requests
+```
+
+## clone this repository
+Run these commands on your laptop:
+```
+sudo -s
+git clone 
+cd 
+```
+
 
 
