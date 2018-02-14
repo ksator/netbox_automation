@@ -250,9 +250,9 @@ def get_prefix_role_id(prefix_role):
     #pprint (rest_call.json())
     #if rest_call.status_code != 200:
     #    print 'failed to get the id of the prefix_role ' + prefix_role
-    device_type_id = rest_call.json()['results'][0]['id']
-    #print device_type_id
-    return device_type_id
+    prefix_role_id = rest_call.json()['results'][0]['id']
+    #print prefix_role_id
+    return prefix_role_id
 
 def create_prefixes():
     url=url_base + 'api/ipam/prefixes/'
@@ -261,7 +261,7 @@ def create_prefixes():
            "prefix": item['prefix'],
            "tenant": get_tenant_id(my_variables_in_yaml['tenants'][0]),
            "status": 1,
-           "role": get_prefix_role_id((my_variables_in_yaml['prefix_roles'][0]))
+           "role": get_prefix_role_id(item['role'])
      }
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
      #pprint (rest_call.json())
