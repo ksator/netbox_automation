@@ -1,5 +1,16 @@
-##############################################################
+###################################################
+# This script deletes almost all the netbox configuration
+###################################################
 
+###################################################
+# usage: python delete_netbox_configuration.py
+###################################################
+
+
+
+###################################################
+# This block indicates the various imports
+###################################################
 import requests
 from requests.auth import HTTPBasicAuth
 import json
@@ -7,7 +18,10 @@ from pprint import pprint
 import yaml
 import time
 
-##############################################################
+
+##################################################
+# This block defines the functions we will use
+###################################################
 
 def import_variables_from_file():
  my_variables_file=open('variables.yml', 'r')
@@ -101,7 +115,9 @@ def delete_platforms():
    rest_call = requests.delete(url, headers=headers)
 
 
-#######################################################
+######################################################
+# this block deletes almost all the Netbox configuration
+######################################################
 
 delete_ip_addresses()
 
