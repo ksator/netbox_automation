@@ -140,7 +140,7 @@ def get_site_id(site):
  #print site_id
  return site_id
 
-def device_types():
+def create_device_types():
     url=url_base + 'api/dcim/device-types/'
     Juniper_id=get_manufacturer_id('Juniper')
     device_types_list=[{"manufacturer": Juniper_id, "model": "qfx5100-48s-6q", "slug": "qfx5100-48s-6q", "part_number": "650-049938", "u_height": 1, "is_full_depth": True, "is_network_device": True},{ "manufacturer": Juniper_id, "model": "qfx10002-36q", "slug": "qfx10002-36q", "part_number": "750-059497", "u_height": 2, "is_full_depth": True, "is_network_device": True}]
@@ -332,7 +332,7 @@ create_sites()
 #for item in my_variables_in_yaml['sites']:
 #    get_site_id(item)
 
-device_types()
+create_device_types()
 #get_device_type_id('qfx10002-36q')
 #get_device_type_id('qfx5100-48s-6q')
 #for item in ['qfx5100-48s-6q','qfx10002-36q']:
