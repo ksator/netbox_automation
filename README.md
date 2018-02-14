@@ -80,6 +80,110 @@ Run these commands on your laptop:
 vi variable.yml
 ```
 ```
+$ more variables.yml 
+---
+# Edit this file to define the details to configure on Netbox
+
+# netbox server ip @
+ip: 192.168.233.152
+
+# netbox user token you want to use
+token: 'b1b0f72bed6946d352b78781030e8d626f5e8c28'
+
+# netbox tenants you want to create. please create one single tenant.
+tenants: 
+    - evpn-vxlan-demo
+
+# netbox sites you want to create. the sites are assigned to the tenant.
+sites:
+    - dc1
+    - dc2
+
+# netbox device-roles you want to create
+device-roles: 
+    - "spine_switch"
+    - "leaf_switch"   
+
+# device-types qfx5100-48s-6q and qfx10002-36q are automatically created. 
+# interface_templates are automatically created for device-types qfx5100-48s-6q and qfx10002-36q
+# power_port_templates are automatically created for device-types qfx5100-48s-6q and qfx10002-36q
+# Juniper Junos platform is be automatically created with a junos napalm_driver
+
+# prefix roles you want to create
+prefix_roles: 
+    - out_of_band_management
+    - devices_interconnection
+
+# prefixes you want to create. 
+# These prefixes are assigned to the tenant.
+prefixes:
+    - prefix: 10.0.102.0/24
+      role: devices_interconnection
+    - prefix: 172.25.190.0/24
+      role: out_of_band_management
+    
+# devices you want to create. the devices are assigned to the tenant.
+devices: 
+    - name: QFX5100-183
+      device_type: qfx5100-48s-6q
+      device_role: leaf_switch
+      site: dc1
+    - name: QFX5100-186
+      device_type: qfx5100-48s-6q
+      device_role: leaf_switch
+      site: dc1
+    - name: QFX10K2-178
+      device_type: qfx10002-36q
+      device_role: spine_switch
+      site: dc1
+    - name: QFX10K2-180
+      device_type: qfx10002-36q
+      device_role: spine_switch
+      site: dc1
+    - name: QFX10K2-181
+      device_type: qfx10002-36q
+      device_role: spine_switch
+      site: dc1
+    - name: QFX10K2-174
+      device_type: qfx10002-36q
+      device_role: spine_switch
+      site: dc2
+    - name: QFX10K2-175
+      device_type: qfx10002-36q
+      device_role: spine_switch
+      site: dc2
+    
+# management ip addresses you want to create. the IP addresses are assigned to the tenant.
+management_addresses: 
+    - ip: 172.25.90.183
+      device: QFX5100-183
+      interface: vme0
+      mgmt_only: True
+    - ip: 172.25.90.186
+      device: QFX5100-186
+      interface: vme0
+      mgmt_only: True
+    - ip: 172.25.90.178
+      device: QFX10K2-178
+      interface: em0
+      mgmt_only: True
+    - ip: 172.25.90.174
+      device: QFX10K2-174
+      interface: em0
+      mgmt_only: True
+    - ip: 172.25.90.175
+      device: QFX10K2-175
+      interface: em0
+      mgmt_only: True
+    - ip: 172.25.90.180
+      device: QFX10K2-180
+      interface: em0
+      mgmt_only: True
+    - ip: 172.25.90.181
+      device: QFX10K2-181
+      interface: em0
+      mgmt_only: True
+
 ```
 ## Configure Netbox with automation
 
