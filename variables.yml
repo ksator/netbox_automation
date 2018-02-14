@@ -76,19 +76,7 @@ devices:
       device_type: qfx10002-36q
       device_role: spine_switch
       site: dc2
-    - name: QFX5110-169
-      device_type: qfx5100-48s-6q
-      device_role: leaf_switch
-      site: dc2
-    - name: QFX5110-170
-      device_type: qfx5100-48s-6q
-      device_role: leaf_switch
-      site: dc2
-    - name: QFX5110-171
-      device_type: qfx5100-48s-6q
-      device_role: leaf_switch
-      site: dc2
-
+    
 # management ip addresses you want to create. the IP addresses are assigned to the tenant.
 management_addresses: 
     - ip: 172.25.90.183
