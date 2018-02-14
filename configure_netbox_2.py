@@ -289,6 +289,32 @@ def create_devices():
      else:
          print 'failed to create device ' + item['name']
 
+def get_device_details(device):
+  device_id=get_device_id(device)
+  url=url_base + 'api/dcim/devices/' + str(device_id)
+  rest_call = requests.get(url, headers=headers)
+  # print url
+  # pprint(rest_call.json())
+  name=rest_call.json()['name']
+  device_type=rest_call.json()['device_type']['id']
+  status=rest_call.json()['status']['value']
+  device_role=rest_call.json()['device_role']['id']
+  platform=rest_call.json()['platform']['id']
+  site=rest_call.json()['site']['id']
+  tenant=rest_call.json()['tenant']['id']
+  id=rest_call.json()['id']
+  payload={
+           "name": name,
+           "device_type": device_type,
+           "status": status,
+           "device_role": device_role,
+           "platform": platform,
+           "site": site,
+           "tenant": tenant
+  }
+  #print payload
+  return payload
+
 def create_ip_addresses():
     url=url_base + 'api/ipam/ip-addresses/'
     for item in my_variables_in_yaml['addresses']:
@@ -301,7 +327,7 @@ def create_ip_addresses():
            "interface": get_interface_id(interface, device)
      }
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
-     pprint (rest_call.json())
+     #pprint (rest_call.json())
      if rest_call.status_code == 201:
          print 'address ip ' + item['ip'] + ' successfully created'
      else:
@@ -313,15 +339,17 @@ def create_management_ip_address():
       device_id=get_device_id(item['device'])
       interface_id=get_interface_id(item['interface'], item['device'])
       address_id=get_address_id((item['device']), interface_id)
-      url=url_base + 'api/dcim/devices/' + str(device_id)
-      payload={"primary_ip4": address_id}
-      print device_id
-      print interface_id
-      print address_id
-      print url
-      print payload
-      rest_call = requests.post(url, headers=headers, data=payload)
-      pprint (rest_call.json())
+      url=url_base + 'api/dcim/devices/' + str(device_id) + '/'
+      payload={
+          "primary_ip4": address_id
+      }
+      #print device_id
+      #print interface_id
+      #print address_id
+      #print url
+      #print payload
+      rest_call = requests.patch(url, headers=headers, data=json.dumps(payload))
+      #pprint (rest_call.json())
 
 def get_address_id(device, interface_id):
     url=url_base + 'api/ipam/ip-addresses/?device=' + device + '&interface_id=' + str(interface_id)
@@ -330,7 +358,7 @@ def get_address_id(device, interface_id):
     #if rest_call.status_code != 200:
     #    print 'failed to get the address id for device ' + device + ' and interface_id ' + interface_id
     address_id = rest_call.json()['results'][0]['id']
-    print "address_id is " + str(address_id)
+    #print "address_id is " + str(address_id)
     return address_id
 
 def get_device_id(device):
@@ -340,7 +368,7 @@ def get_device_id(device):
     #if rest_call.status_code != 200:
     #    print 'failed to get the id of the device ' + device
     device_id = rest_call.json()['results'][0]['id']
-    print "device_id is " + str(device_id)
+    #print "device_id is " + str(device_id)
     return device_id
 
 def get_interface_id(interface, device):
@@ -350,7 +378,7 @@ def get_interface_id(interface, device):
     #if rest_call.status_code != 200:
     #    print 'failed to get the id of the interface ' + interface + ' of the device ' + device
     interface_id = rest_call.json()['results'][0]['id']
-    print "interface_id is " + str(interface_id)
+    #print "interface_id is " + str(interface_id)
     return interface_id
 
 
@@ -410,3 +438,5 @@ create_devices()
 create_ip_addresses()
 
 create_management_ip_address()
+
+#get_device_details('QFX5100-183')
