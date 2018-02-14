@@ -5,6 +5,9 @@
 [**Netbox Installation**](README.md#netbox-installation)  
 [**install the requirements to use the automation content hosted in this repository**](README.md#install-the-requirements-to-use-the-automation-content-hosted-in-this-repository)  
 [**clone this repository**](README.md#clone-this-repository)  
+[**Define your variables**](README.md#define-your-variables)  
+[**Configure Netbox with automation**](README.md#configure-netbox-with-automation)  
+[**Delete Netbox configuration with automation**](README.md#delete-netbox-configuration-with-automation)  
 [**Looking for more automation solutions**](README.md#looking-for-more-automation-solutions)  
 
 
@@ -62,6 +65,26 @@ sudo -s
 git clone https://github.com/ksator/netbox_automation.git 
 cd netbox_automation
 ```
+
+## Define your variables
+
+The file [variables.yml](variables.yml) defines variables.
+On your laptop, edit it to indicate details such as:
+
+- The IP address of your Netbox server
+- The Netbox user token you want to use
+- The Netbox details you want to configure (tenant, sites, device-roles, device-types, devices, prefixes-roles, prefixes, ....)
+
+Run these commands on your laptop:
+```
+vi variable.yml
+```
+```
+```
+## Configure Netbox with automation
+
+## Delete Netbox configuration with automation
+
 
 ## Looking for more automation solutions
 
