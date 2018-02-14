@@ -312,11 +312,15 @@ def create_management_ip_address():
      if item['mgmt_only']==True:
       device_id=get_device_id(item['device'])
       interface_id=get_interface_id(item['interface'], item['device'])
+      address_id=get_address_id((item['device']), interface_id)
       url=url_base + 'api/dcim/devices/' + str(device_id)
-      payload={
-            "primary_ip4": get_address_id((item['device']), interface_id)
-      }
-      rest_call = requests.patch(url, headers=headers, data=json.dumps(payload))
+      payload={"primary_ip4": address_id}
+      print device_id
+      print interface_id
+      print address_id
+      print url
+      print payload
+      rest_call = requests.post(url, headers=headers, data=payload)
       pprint (rest_call.json())
 
 def get_address_id(device, interface_id):
