@@ -48,26 +48,26 @@ devices:
       device_type: qfx5100-48s-6q
       device_role: leaf_switch
       site: dc1
-#    - name: QFX5100-186
-#      device_type: qfx5100-48s-6q
-#      device_role: leaf_switch
-#      site: dc1
-#    - name: QFX10K2-178
-#      device_type: qfx10002-36q
-#      device_role: spine_switch
-#      site: dc1
-#    - name: QFX10K2-179
-#      device_type: qfx10002-36q
-#      device_role: spine_switch
-#      site: dc1
-#    - name: QFX10K2-180
-#      device_type: qfx10002-36q
-#      device_role: spine_switch
-#      site: dc1
-#    - name: QFX10K2-181
-#      device_type: qfx10002-36q
-#      device_role: spine_switch
-#      site: dc1
+    - name: QFX5100-186
+      device_type: qfx5100-48s-6q
+      device_role: leaf_switch
+      site: dc1
+    - name: QFX10K2-178
+      device_type: qfx10002-36q
+      device_role: spine_switch
+      site: dc1
+    - name: QFX10K2-179
+      device_type: qfx10002-36q
+      device_role: spine_switch
+      site: dc1
+    - name: QFX10K2-180
+      device_type: qfx10002-36q
+      device_role: spine_switch
+      site: dc1
+    - name: QFX10K2-181
+      device_type: qfx10002-36q
+      device_role: spine_switch
+      site: dc1
 
 # ip addresses you want to create. the IP addresses are assigned to the tenant.
 addresses: 
@@ -75,8 +75,8 @@ addresses:
       device: QFX5100-183
       interface: vme0
       mgmt_only: True
-#    - ip: 172.25.90.178
-#      device: QFX10K2-178
-#      interface: em0
-#      mgmt_only: True
+    - ip: 172.25.90.178
+      device: QFX10K2-178
+      interface: em0
+      mgmt_only: True
 
