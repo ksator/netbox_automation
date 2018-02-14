@@ -2,7 +2,7 @@
 # Edit this file to define the details to configure on Netbox
 
 # netbox server ip @
-ip: 192.168.233.151
+ip: 192.168.233.152
 
 # netbox user token you want to use
 token: 'b1b0f72bed6946d352b78781030e8d626f5e8c28'
@@ -53,10 +53,6 @@ devices:
       device_type: qfx10002-36q
       device_role: spine_switch
       site: dc1
-    - name: QFX10K2-179
-      device_type: qfx10002-36q
-      device_role: spine_switch
-      site: dc1
     - name: QFX10K2-180
       device_type: qfx10002-36q
       device_role: spine_switch
@@ -104,9 +100,3 @@ management_addresses:
       device: QFX10K2-181
       interface: em0
       mgmt_only: True
-    - ip: 172.25.90.182
-      device: QFX10K2-182
-      interface: em0
-      mgmt_only: True
-
-

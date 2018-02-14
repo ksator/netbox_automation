@@ -343,13 +343,7 @@ def create_management_ip_address():
       payload={
           "primary_ip4": address_id
       }
-      #print device_id
-      #print interface_id
-      #print address_id
-      #print url
-      #print payload
       rest_call = requests.patch(url, headers=headers, data=json.dumps(payload))
-      #pprint (rest_call.json())
 
 def get_address_id(device, interface_id):
     url=url_base + 'api/ipam/ip-addresses/?device=' + device + '&interface_id=' + str(interface_id)
