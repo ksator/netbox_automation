@@ -5,6 +5,8 @@
 [**Netbox Installation**](README.md#netbox-installation)  
 [**install the requirements to use the automation content hosted in this repository**](README.md#install-the-requirements-to-use-the-automation-content-hosted-in-this-repository)  
 [**clone this repository**](README.md#clone-this-repository)  
+[**Looking for more Junos automation solutions**](README.md#looking-for-more-junos-automation-solutions)  
+
 
 ## About Netbox
 
@@ -56,5 +58,9 @@ git clone https://github.com/ksator/netbox_automation.git
 cd netbox_automation
 ```
 
+## Looking for more automation solutions
 
+https://github.com/ksator?tab=repositories  
+https://gitlab.com/users/ksator/projects  
+https://gist.github.com/ksator/  
 
