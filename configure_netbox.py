@@ -292,10 +292,13 @@ def create_devices():
 def create_ip_addresses():
     url=url_base + 'api/ipam/ip-addresses/'
     for item in my_variables_in_yaml['addresses']:
+     device=item['device']
+     interface=item['interface']
      payload={
            "status": 1,
            "address": item['ip'],
-           "tenant": get_tenant_id(my_variables_in_yaml['tenants'][0])
+           "tenant": get_tenant_id(my_variables_in_yaml['tenants'][0]),
+           "interface": get_interface_id(interface, device)
      }
      rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
      #pprint (rest_call.json())
@@ -303,6 +306,47 @@ def create_ip_addresses():
          print 'address ip ' + item['ip'] + ' successfully created'
      else:
          print 'failed to create ip address ' + item['ip']
+
+def create_management_ip_address():
+    for item in my_variables_in_yaml['addresses']:
+     if item['mgmt_only']==True:
+      device_id=get_device_id(item['device'])
+      interface_id=get_interface_id(item['interface'], item['device'])
+      url=url_base + 'api/dcim/devices/' + str(device_id)
+      payload={
+            "primary_ip4": get_address_id((item['device']), interface_id)
+      }
+      rest_call = requests.patch(url, headers=headers, data=json.dumps(payload))
+
+def get_address_id(device, interface_id):
+    url=url_base + 'api/ipam/ip-addresses/?device=' + device + ' &interface_id=' + str(interface_id)
+    rest_call = requests.get(url, headers=headers)
+    #pprint (rest_call.json())
+    #if rest_call.status_code != 200:
+    #    print 'failed to get the address id for device ' + device + ' and interface_id ' + interface_id
+    address_id = rest_call.json()['results'][0]['id']
+    #print address_id
+    return address_id
+
+def get_device_id(device):
+    url=url_base + 'api/dcim/devices/?name=' + device
+    rest_call = requests.get(url, headers=headers)
+    #pprint (rest_call.json())
+    #if rest_call.status_code != 200:
+    #    print 'failed to get the id of the device ' + device
+    device_id = rest_call.json()['results'][0]['id']
+    #print device_id
+    return device_id
+
+def get_interface_id(interface, device):
+    url=url_base + 'api/dcim/interfaces/?name=' + interface + '&device=' + device
+    rest_call = requests.get(url, headers=headers)
+    #pprint (rest_call.json())
+    #if rest_call.status_code != 200:
+    #    print 'failed to get the id of the interface ' + interface + ' of the device ' + device
+    interface_id = rest_call.json()['results'][0]['id']
+    #print interface_id
+    return interface_id
 
 
 ######################################################
@@ -360,3 +404,4 @@ create_devices()
 
 create_ip_addresses()
 
+create_management_ip_address()
