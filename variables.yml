@@ -27,9 +27,9 @@ device-roles:
 
 # power_port_templates will be automatically created for device-types qfx5100-48s-6q and qfx10002-36q
 
-# Juniper Junos platform will be automatically updated with a junos  napalm_driver
+# Juniper Junos platform will be automatically created with a junos napalm_driver
 
-# prefixe roles you want to create
+# prefix roles you want to create
 prefix_roles: 
     - out_of_band_management
     - devices_interconnection
