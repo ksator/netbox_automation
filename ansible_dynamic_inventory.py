@@ -57,7 +57,7 @@ for item in rest_call.json()['results']:
 
 url = url_base + 'api/dcim/sites/'
 rest_call_get_sites = requests.get(url, headers=headers)
-for site in rest_call_get_sites.json()['results']: 
+for site in rest_call_get_sites.json()['results']:
     site_name = site['name']
     ansible_inventory_file.write("[" + site_name + "]\n")
     url = url_base + 'api/dcim/devices/?manufacturer=juniper&site=' + site_name + '&is_network_device=True&has_primary_ip=True'
@@ -66,6 +66,19 @@ for site in rest_call_get_sites.json()['results']:
         device_name = device['name']
         ansible_inventory_file.write("[" + device_name + "]\n")
     ansible_inventory_file.write("\n")
+
+url= url_base + 'api/dcim/device-roles/'
+rest_call_get_roles = requests.get(url, headers=headers)
+for role in rest_call_get_roles.json()['results']:
+    role_name = role['name']
+    ansible_inventory_file.write("[" + role_name + "]\n")
+    url = url_base + 'api/dcim/devices/?manufacturer=juniper&role=' + role_name + '&is_network_device=True&has_primary_ip=True'
+    rest_call_get_devices = requests.get(url, headers=headers)
+    for device in rest_call_get_devices.json()['results']:
+        device_name = device['name']
+        ansible_inventory_file.write("[" + device_name + "]\n")
+    ansible_inventory_file.write("\n")
+
 ansible_inventory_file.close()
 
 
