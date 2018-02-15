@@ -54,6 +54,9 @@ Once netbox is installed, you can use it:
 - netbox API http://your_netbox_server/api/
 - netbox API doc http://your_netbox_server/api/docs/
 
+This repository use Netbox REST API. So you need to create a Netbox API Token. 
+
+
 ## install the requirements to use the automation content hosted in this repository  
 The python scripts  hosted in this repository use the library **requests** to makes REST calls to Netbox.   
 Run these commands on your laptop:
