@@ -10,6 +10,7 @@
 [**Define your variables**](README.md#define-your-variables)  
 [**Configure Netbox with automation**](README.md#configure-netbox-with-automation)  
 [**Generate the ansible inventory from Netbox API**](README.md#generate-the-ansible-inventory-from-netbox-api)  
+[**Generate yaml files for Jinja templates or ansible playbooks from Netbox API**](README.md#generate-yaml-files-for-jinja-templates-or-ansible-playbooks-from-netbox-api)  
 [**Delete Netbox configuration with automation**](README.md#delete-netbox-configuration-with-automation)  
 [**Continuous integration with Travis CI**](README.md#continuous-integration-with-travis-ci)  
 [**Looking for more automation solutions**](README.md#looking-for-more-automation-solutions)  
@@ -488,34 +489,39 @@ PLAY RECAP *********************************************************************
 QFX5100-183                : ok=2    changed=0    unreachable=0    failed=0   
 QFX5100-186                : ok=2    changed=0    unreachable=0    failed=0   
 ```
-## Generate yaml variables for Jinja templates from Netbox API
+## Generate yaml files for Jinja templates or ansible playbooks from Netbox API
 
-The script [**generate_vars_for_jinja_from_netbox.py**](generate_vars_for_jinja_from_netbox.py) generates yaml variable for jinja templates and ansible playbooks from Netbox API. 
+The script [**generate_vars_for_jinja_from_netbox.py**](generate_vars_for_jinja_from_netbox.py) generates yaml files for jinja templates and ansible playbooks from Netbox API. 
 
 ```
-# ls | grep QFX
+# ls host_vars
+ls: cannot access 'host_vars': No such file or directory
 ```
 ```
 # python generate_vars_for_jinja_from_netbox.py
 ```
 ```
-# ls | grep QFX
-QFX10K2-174
-QFX10K2-175
-QFX10K2-178
-QFX10K2-180
-QFX10K2-181
-QFX5100-183
-QFX5100-186
+# ls host_vars
+QFX10K2-174  QFX10K2-175  QFX10K2-178  QFX10K2-180  QFX10K2-181  QFX5100-183  QFX5100-186
 ```
 ```
-# more QFX10K2-181/vars_from_netbox_api.yml 
+# more host_vars/QFX10K2-181/vars_from_netbox_api.yml 
 vars_from_netbox_api:
 - address: 10.0.2.15/31
   interface: et-0/0/0
 - address: 10.0.2.25/31
   interface: et-0/0/1
 - address: 172.25.90.181/32
+  interface: em0
+```
+```
+# more host_vars/QFX10K2-178/vars_from_netbox_api.yml 
+vars_from_netbox_api:
+- address: 10.0.2.9/31
+  interface: et-0/0/0
+- address: 10.0.2.19/31
+  interface: et-0/0/1
+- address: 172.25.90.178/32
   interface: em0
 ```
 
