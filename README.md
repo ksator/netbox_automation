@@ -11,6 +11,7 @@
 [**Configure Netbox with automation**](README.md#configure-netbox-with-automation)  
 [**Generate the ansible inventory from Netbox API**](README.md#generate-the-ansible-inventory-from-netbox-api)  
 [**Generate yaml files for Jinja templates or ansible playbooks from Netbox API**](README.md#generate-yaml-files-for-jinja-templates-or-ansible-playbooks-from-netbox-api)  
+[**Use the yaml files generated from the Netbox API**](README.md#use-the-yaml-files-generated-from-the-netbox-api)  
 [**Delete Netbox configuration with automation**](README.md#delete-netbox-configuration-with-automation)  
 [**Continuous integration with Travis CI**](README.md#continuous-integration-with-travis-ci)  
 [**Looking for more automation solutions**](README.md#looking-for-more-automation-solutions)  
@@ -528,7 +529,9 @@ vars_from_netbox_api:
 - address: 172.25.90.178/32
   interface: em0
 ```
-Use the generated variables: 
+
+## Use the yaml files generated from the Netbox API 
+
 The playbook [**pb_check_interfaces.yml**](pb_check_interfaces.yml) uses: 
 - the ansible inventory we generated from Netbox API
 - the variables we generated from Netbox API 
