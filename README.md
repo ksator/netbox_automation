@@ -289,6 +289,8 @@ $ python ansible_dynamic_inventory.py
 ```
 ```
 $ more hosts 
+#Ansible dynamic inventory file generated from Netbox API
+
 [juniper:children]
 qfx10002-36q
 qfx5100-48s-6q
@@ -325,9 +327,150 @@ QFX5100-186 junos_host=172.25.90.186
 [QFX10K2-178]
 [QFX10K2-180]
 [QFX10K2-181]
-
 ```
 
+```
+# ansible-playbook pb_print_junos_facts.yml
+
+PLAY [Get Facts] ********************************************************************************************************************************************************
+
+TASK [Retrieve information from devices running Junos] ******************************************************************************************************************
+ok: [QFX10K2-178]
+ok: [QFX10K2-180]
+ok: [QFX10K2-174]
+ok: [QFX10K2-175]
+ok: [QFX10K2-181]
+ok: [QFX5100-183]
+ok: [QFX5100-186]
+
+TASK [Print some facts] *************************************************************************************************************************************************
+ok: [QFX10K2-174] => {
+    "msg": "device QFX10K2-174 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX10K2-175] => {
+    "msg": "device QFX10K2-175 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX10K2-178] => {
+    "msg": "device QFX10K2-178 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX10K2-180] => {
+    "msg": "device QFX10K2-180 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX10K2-181] => {
+    "msg": "device QFX10K2-181 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX5100-183] => {
+    "msg": "device QFX5100-183 is a qfx5100-48s-6q running junos version 17.4R1-S1.9"
+}
+ok: [QFX5100-186] => {
+    "msg": "device QFX5100-186 is a qfx5100-48s-6q running junos version 17.4R1-S1.9"
+}
+
+PLAY RECAP **************************************************************************************************************************************************************
+QFX10K2-174                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-175                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-178                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-180                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-181                : ok=2    changed=0    unreachable=0    failed=0   
+QFX5100-183                : ok=2    changed=0    unreachable=0    failed=0   
+QFX5100-186                : ok=2    changed=0    unreachable=0    failed=0   
+```
+```
+# ansible-playbook pb_print_junos_facts.yml --limit QFX10K2-180
+
+PLAY [Get Facts] ********************************************************************************************************************************************************
+
+TASK [Retrieve information from devices running Junos] ******************************************************************************************************************
+ok: [QFX10K2-180]
+
+TASK [Print some facts] *************************************************************************************************************************************************
+ok: [QFX10K2-180] => {
+    "msg": "device QFX10K2-180 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+
+PLAY RECAP **************************************************************************************************************************************************************
+QFX10K2-180                : ok=2    changed=0    unreachable=0    failed=0   
+```
+```
+# ansible-playbook pb_print_junos_facts.yml --limit dc2
+
+PLAY [Get Facts] ********************************************************************************************************************************************************
+
+TASK [Retrieve information from devices running Junos] ******************************************************************************************************************
+ok: [QFX10K2-174]
+ok: [QFX10K2-175]
+
+TASK [Print some facts] *************************************************************************************************************************************************
+ok: [QFX10K2-174] => {
+    "msg": "device QFX10K2-174 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX10K2-175] => {
+    "msg": "device QFX10K2-175 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+
+PLAY RECAP **************************************************************************************************************************************************************
+QFX10K2-174                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-175                : ok=2    changed=0    unreachable=0    failed=0   
+```
+```
+# ansible-playbook pb_print_junos_facts.yml --limit spine_switch
+
+PLAY [Get Facts] ********************************************************************************************************************************************************
+
+TASK [Retrieve information from devices running Junos] ******************************************************************************************************************
+ok: [QFX10K2-180]
+ok: [QFX10K2-175]
+ok: [QFX10K2-174]
+ok: [QFX10K2-178]
+ok: [QFX10K2-181]
+
+TASK [Print some facts] *************************************************************************************************************************************************
+ok: [QFX10K2-174] => {
+    "msg": "device QFX10K2-174 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX10K2-175] => {
+    "msg": "device QFX10K2-175 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX10K2-178] => {
+    "msg": "device QFX10K2-178 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX10K2-180] => {
+    "msg": "device QFX10K2-180 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+ok: [QFX10K2-181] => {
+    "msg": "device QFX10K2-181 is a qfx10002-36q running junos version 17.4R1-S1.9"
+}
+
+PLAY RECAP **************************************************************************************************************************************************************
+QFX10K2-174                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-175                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-178                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-180                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-181                : ok=2    changed=0    unreachable=0    failed=0   
+
+```
+```
+# ansible-playbook pb_print_junos_facts.yml --limit qfx5100-48s-6q
+
+PLAY [Get Facts] ********************************************************************************************************************************************************
+
+TASK [Retrieve information from devices running Junos] ******************************************************************************************************************
+ok: [QFX5100-183]
+ok: [QFX5100-186]
+
+TASK [Print some facts] *************************************************************************************************************************************************
+ok: [QFX5100-183] => {
+    "msg": "device QFX5100-183 is a qfx5100-48s-6q running junos version 17.4R1-S1.9"
+}
+ok: [QFX5100-186] => {
+    "msg": "device QFX5100-186 is a qfx5100-48s-6q running junos version 17.4R1-S1.9"
+}
+
+PLAY RECAP **************************************************************************************************************************************************************
+QFX5100-183                : ok=2    changed=0    unreachable=0    failed=0   
+QFX5100-186                : ok=2    changed=0    unreachable=0    failed=0   
+
+```
 ## Delete Netbox configuration with automation
 The script [**delete_netbox_configuration.py**](delete_netbox_configuration.py) delete the Netbox configuration: 
    - all tenants
