@@ -1,0 +1,26 @@
+[juniper:children]
+qfx10002-36q
+qfx5100-48s-6q
+
+[qfx10002-36q]
+QFX10K2-174 junos_host=172.25.90.174
+QFX10K2-175 junos_host=172.25.90.175
+QFX10K2-178 junos_host=172.25.90.178
+QFX10K2-180 junos_host=172.25.90.180
+QFX10K2-181 junos_host=172.25.90.181
+
+[qfx5100-48s-6q]
+QFX5100-183 junos_host=172.25.90.183
+QFX5100-186 junos_host=172.25.90.186
+
+[dc1]
+[QFX10K2-178]
+[QFX10K2-180]
+[QFX10K2-181]
+[QFX5100-183]
+[QFX5100-186]
+
+[dc2]
+[QFX10K2-174]
+[QFX10K2-175]
+
