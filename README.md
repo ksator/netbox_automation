@@ -7,7 +7,7 @@
 [**clone this repository**](README.md#clone-this-repository)  
 [**Define your variables**](README.md#define-your-variables)  
 [**Configure Netbox with automation**](README.md#configure-netbox-with-automation)  
-[**Dynamic ansible inventory from Netbox API**](README.md#dynamic-ansible-inventory-from-netbox-api)
+[**Dynamic ansible inventory from Netbox API**](README.md#dynamic-ansible-inventory-from-netbox-api)  
 [**Delete Netbox configuration with automation**](README.md#delete-netbox-configuration-with-automation)  
 [**Looking for more automation solutions**](README.md#looking-for-more-automation-solutions)  
 
