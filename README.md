@@ -487,8 +487,38 @@ ok: [QFX5100-186] => {
 PLAY RECAP **************************************************************************************************************************************************************
 QFX5100-183                : ok=2    changed=0    unreachable=0    failed=0   
 QFX5100-186                : ok=2    changed=0    unreachable=0    failed=0   
+```
+## Generate yaml variables for Jinja templates from Netbox API
+
+The script [**generate_vars_for_jinja_from_netbox.py**](generate_vars_for_jinja_from_netbox.py) generates yaml variable for jinja templates and ansible playbooks from Netbox API. 
 
 ```
+# ls | grep QFX
+```
+```
+# python generate_vars_for_jinja_from_netbox.py
+```
+```
+# ls | grep QFX
+QFX10K2-174
+QFX10K2-175
+QFX10K2-178
+QFX10K2-180
+QFX10K2-181
+QFX5100-183
+QFX5100-186
+```
+```
+# more QFX10K2-181/vars_from_netbox_api.yml 
+vars_from_netbox_api:
+- address: 10.0.2.15/31
+  interface: et-0/0/0
+- address: 10.0.2.25/31
+  interface: et-0/0/1
+- address: 172.25.90.181/32
+  interface: em0
+```
+
 ## Delete Netbox configuration with automation
 The script [**delete_netbox_configuration.py**](delete_netbox_configuration.py) delete the Netbox configuration: 
    - all tenants
