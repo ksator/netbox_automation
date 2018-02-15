@@ -1,8 +1,29 @@
+
+###################################################
+# This script generates an Ansible dynamic inventory from Netbox API
+###################################################
+
+###################################################
+# usage: 
+python ansible_dynamic_inventory.py
+more hosts
+###################################################
+
+
+
+###################################################
+# This block indicates the various imports
+###################################################
+
 import requests
 from requests.auth import HTTPBasicAuth
 import json
 from pprint import pprint
 import yaml
+
+##################################################
+# This block defines the functions we will use
+###################################################
 
 def import_variables_from_file():
     my_variables_file=open('variables.yml', 'r')
@@ -16,6 +37,10 @@ def get_device_type_id(model):
     rest_call = requests.get(url, headers=headers)
     device_type_id = rest_call.json()['results'][0]['id']
     return device_type_id
+
+######################################################
+# this block generates the Ansible dynamic inventory from Netbox API
+######################################################
 
 my_variables_in_yaml = import_variables_from_file()
 
