@@ -234,6 +234,9 @@ interface_connections:
       connection_status: Connected
 ```
 ## Configure Netbox with automation
+
+The script [**configure_netbox.py**](configure_netbox.py) configure Netbox using the file [**variables.yml**](variables.yml) 
+
 ```
 $ python configure_netbox.py 
 device role spine_switch successfully created
