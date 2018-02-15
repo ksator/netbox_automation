@@ -86,7 +86,9 @@ On your laptop, edit it to indicate details such as:
    - device management ip addresses
    - ip addresses to assign to devices interfaces
 
-In addition to this, there are others Netbox details (device-types and a platform) that will be configured automatically. 
+In addition to this, there are others Netbox details that will be configured automatically: 
+   - device-types (Juniper qfx5100-48s-6q and qfx10002-36q) 
+   - a platform (Junos platform with a junos napalm_driver)
 
 Run these commands on your laptop:
 ```
