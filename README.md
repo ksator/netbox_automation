@@ -27,7 +27,7 @@ Here's the [code](https://github.com/digitalocean/netbox)
 This repository uses Python to: 
 
 - Automation content to configure an existing Netbox server
-- Automation content to generate a dynamic ansible inventory from Netbox API
+- Automation content to generate an ansible inventory file from Netbox API
 - Automation content to  generate yaml variables for Jinja templates from Netbox API
 
 This repository doesnt install Netbox. You still need to install Netbox yourself.
@@ -280,7 +280,7 @@ interface connection between QFX10K2-181 et-0/0/3 and QFX5100-186 et-0/0/49 succ
 
 ```
 
-## Generates the ansible inventory from Netbox API
+## Generate the ansible inventory from Netbox API
 
 The script  [**ansible_dynamic_inventory.py**](ansible_dynamic_inventory.py) generates the ansible inventory [**hosts**](hosts) from Netbox API  
 
