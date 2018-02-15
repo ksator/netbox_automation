@@ -7,7 +7,7 @@
 [**clone this repository**](README.md#clone-this-repository)  
 [**Define your variables**](README.md#define-your-variables)  
 [**Configure Netbox with automation**](README.md#configure-netbox-with-automation)  
-[**Dynamic ansible inventory from Netbox API**](README.md#dynamic-ansible-inventory-from-netbox-api)  
+[**Generate the ansible inventory from Netbox API**](README.md#generate-the-ansible-inventory-from-netbox-api)  
 [**Delete Netbox configuration with automation**](README.md#delete-netbox-configuration-with-automation)  
 [**Looking for more automation solutions**](README.md#looking-for-more-automation-solutions)  
 
@@ -280,7 +280,7 @@ interface connection between QFX10K2-181 et-0/0/3 and QFX5100-186 et-0/0/49 succ
 
 ```
 
-## Dynamic ansible inventory from Netbox API
+## Generates the ansible inventory from Netbox API
 
 The script  [**ansible_dynamic_inventory.py**](ansible_dynamic_inventory.py) generates the ansible inventory [**hosts**](hosts) from Netbox API  
 
@@ -327,6 +327,17 @@ QFX5100-186 junos_host=172.25.90.186
 [QFX10K2-178]
 [QFX10K2-180]
 [QFX10K2-181]
+```
+
+The playbook [**pb_print_junos_facts.yml**](pb_print_junos_facts.yml) has been tested with ansible 2.4.2.0.  
+It uses the ansible inventory file generated from Netbox API. 
+
+Run these commands on Ubuntu 16.04 to install Ansible and its requirements for Junos:
+```
+sudo -s
+apt-get update
+apt-get install -y python-dev libxml2-dev python-pip libxslt1-dev build-essential libssl-dev libffi-dev git
+pip install junos-eznc jxmlease wget ansible==2.4.2.0 requests ipaddress cryptography 
 ```
 
 ```
