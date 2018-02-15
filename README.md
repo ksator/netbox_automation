@@ -80,13 +80,13 @@ On your laptop, edit it to indicate details such as:
    - a tenant
    - sites
    - device-roles
-   - device-types
    - devices
    - prefixes-roles
    - prefixes
    - device management ip addresses
    - ip addresses to assign to devices interfaces
-   - on some other details
+
+In addition to this, there are others Netbox details (device-types and a platform) that will be configured automatically. 
 
 Run these commands on your laptop:
 ```
@@ -234,6 +234,7 @@ The script [**delete_netbox_configuration.py**](delete_netbox_configuration.py) 
    - all sites
    - all device-roles
    - all device-types
+   - all platforms
    - all devices
    - all prefixes-roles
    - all prefixes
