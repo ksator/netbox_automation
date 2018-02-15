@@ -25,9 +25,9 @@ Here's the [code](https://github.com/digitalocean/netbox)
 
 This repository uses Python to: 
 
-- configure an existing Netbox setup
-- get data from Netbox and generate dynamic ansible inventory
-- get data from Netbox and generate yaml variables for Jinja templates
+- Automation content to configure an existing Netbox server
+- Automation content to generate a dynamic ansible inventory from Netbox API
+- Automation content to  generate yaml variables for Jinja templates from Netbox API
 
 This repository doesnt install Netbox. You still need to install Netbox yourself.
 
