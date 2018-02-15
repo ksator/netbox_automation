@@ -13,7 +13,11 @@
 
 ## About Netbox
 
-Netbox is a popular open source IP address management (IPAM) and data center infrastructure management (DCIM) tool.  
+Netbox is a popular open source IP address management (IPAM) and data center infrastructure management (DCIM) tool maintained by Jeremy Stretch.  
+
+Netbox has RESTful API. The NetBox API represents all objects in JSON. 
+There is a NAPALM integration to pull some data from devices for validation purpose. 
+
 Here's the [doc](https://netbox.readthedocs.io/en/latest/)   
 Here's the [code](https://github.com/digitalocean/netbox)  
 
