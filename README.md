@@ -29,11 +29,12 @@ Here's the [code](https://github.com/digitalocean/netbox)
 
 ## About this repo
 
-This repository uses Python to: 
+Netbox is supposed to be the source of truth for the the assets it manages:
 
-- Automation content to configure an existing Netbox server
-- Automation content to generate an ansible inventory file from Netbox API
-- Automation content to  generate yaml variables for Jinja templates from Netbox API
+So this new repo is about: 
+-	Netbox configuration with automation (with a focus on Juniper devices) 
+-	ansible inventory file generated with automation from Netbox API   
+-	yaml files (variables) for Jinja templates or ansible playbooks generated with automation from Netbox API 
 
 This repository doesnt install Netbox. You still need to install Netbox yourself.
 
