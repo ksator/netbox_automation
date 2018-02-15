@@ -58,9 +58,6 @@ def delete_interface_connections():
        url=url_base + 'api/dcim/interface-connections/' + str(id) + '/'
        rest_call = requests.delete(url, headers=headers)
 
-
-######################################################
-
 def delete_devices():
  url=url_base + 'api/dcim/devices'
  rest_call = requests.get(url, headers=headers)
