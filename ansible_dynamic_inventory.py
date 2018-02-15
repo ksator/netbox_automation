@@ -56,6 +56,9 @@ headers={
 
 ansible_inventory_file = open('hosts', "w")
 
+ansible_inventory_file.write("#Ansible dynamic inventory file generated from Netbox API\n")
+ansible_inventory_file.write("\n")
+
 ansible_inventory_file.write("[juniper:children]\n")
 
 url=url_base + 'api/dcim/device-types/?is_network_device=True&manufacturer=juniper'

@@ -1,3 +1,5 @@
+#Ansible dynamic inventory file generated from Netbox API
+
 [juniper:children]
 qfx10002-36q
 qfx5100-48s-6q
