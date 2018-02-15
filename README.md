@@ -43,11 +43,15 @@ This repository has been tested using:
 ## How to use this repo
 
 The steps are:  
-- Install Netbox. This repository doesnt install Netbox. You still need to install Netbox yourself.  
+- Install Netbox. 
+   - This repository doesnt install Netbox. You still need to install Netbox yourself.  
 - Install the requirements to use the python scripts hosted in this repository  
 - Clone this repository
 - Edit the file [**variables.yml**](variables.yml) to indicate what you want to configure on Netbox
-- Execute the script [**configure_netbox.py**](configure_netbox.py): It uses the variables defined in the file [**variables.yml**](variables.yml) and configure Netbox    
+- To configure Netbox, execute the script [**configure_netbox.py**](configure_netbox.py). 
+   - It uses the variables defined in the file [**variables.yml**](variables.yml) and configure Netbox 
+- To generate an Ansible inventory file from Netbox API, execute the script [**ansible_dynamic_inventory.py**](ansible_dynamic_inventory.py)
+- To delete Netbox configuration, execute the script [**delete_netbox_configuration.py**](delete_netbox_configuration.py)
 
 ## Netbox Installation
 See the [**installation guide**](http://netbox.readthedocs.io/en/stable/)  
