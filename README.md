@@ -572,6 +572,127 @@ QFX10K2-180                : ok=2    changed=0    unreachable=0    failed=0
 QFX10K2-181                : ok=2    changed=0    unreachable=0    failed=0   
 ```
 
+The playbook [**pb_render_template.yml**](pb_render_template.yml) renders the template [**template.j2**](template.j2) using the yaml files built from Netbox API. It saves the generated files in the directory [**render**](render).   
+
+```
+# more pb_render_template.yml 
+---
+ - name: create a directory 
+   hosts: localhost
+   gather_facts: no
+   
+   tasks:
+    
+   - name: create the directory render
+     file: 
+        path: "{{playbook_dir}}/render" 
+        state: directory
+
+ - name: render junos configuration template using vars from Netbox API
+   hosts: juniper
+   connection: local
+   gather_facts: no
+
+   tasks:
+
+    - name: render junos configuration template using vars from Netbox API
+      template: 
+        src: "{{ playbook_dir }}/template.j2" 
+        dest: "{{ playbook_dir }}/render/{{ inventory_hostname }}.conf"
+
+```
+```
+# more template.j2 
+interfaces {
+{% for item in vars_from_netbox_api %}
+    {{ item.interface }} {
+        unit 0 {
+            family inet {
+                address {{ item.address }};
+            }
+        }
+    }
+{% endfor %}
+}
+protocols {
+    lldp {
+{% for item in vars_from_netbox_api %}
+        interface "{{ item.interface }}";
+{% endfor %}
+    }
+}
+
+```
+```
+# ls render
+ls: cannot access 'render': No such file or directory
+```
+```
+# ansible-playbook pb_render_template.yml 
+
+PLAY [create a directory] ***********************************************************************************************************************************************
+
+TASK [create the directory render] **************************************************************************************************************************************
+changed: [localhost]
+
+PLAY [render junos configuration template using vars from Netbox API] ***************************************************************************************************
+
+TASK [render junos configuration template using vars from Netbox API] ***************************************************************************************************
+changed: [QFX10K2-181]
+changed: [QFX10K2-174]
+changed: [QFX10K2-180]
+changed: [QFX10K2-175]
+changed: [QFX10K2-178]
+changed: [QFX5100-183]
+changed: [QFX5100-186]
+
+PLAY RECAP **************************************************************************************************************************************************************
+QFX10K2-174                : ok=1    changed=1    unreachable=0    failed=0   
+QFX10K2-175                : ok=1    changed=1    unreachable=0    failed=0   
+QFX10K2-178                : ok=1    changed=1    unreachable=0    failed=0   
+QFX10K2-180                : ok=1    changed=1    unreachable=0    failed=0   
+QFX10K2-181                : ok=1    changed=1    unreachable=0    failed=0   
+QFX5100-183                : ok=1    changed=1    unreachable=0    failed=0   
+QFX5100-186                : ok=1    changed=1    unreachable=0    failed=0   
+localhost                  : ok=1    changed=1    unreachable=0    failed=0   
+```
+```
+# ls render
+QFX10K2-174.conf  QFX10K2-175.conf  QFX10K2-178.conf  QFX10K2-180.conf  QFX10K2-181.conf  QFX5100-183.conf  QFX5100-186.conf
+```
+```
+# more render/QFX10K2-181.conf 
+interfaces {
+    et-0/0/0 {
+        unit 0 {
+            family inet {
+                address 10.0.2.15/31;
+            }
+        }
+    }
+    et-0/0/1 {
+        unit 0 {
+            family inet {
+                address 10.0.2.25/31;
+            }
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                address 172.25.90.181/32;
+            }
+        }
+    }
+}
+protocols {
+    lldp {
+        interface "et-0/0/0";
+        interface "et-0/0/1";
+        interface "em0";
+    }
+}
+```
 ## Delete Netbox configuration with automation
 The script [**delete_netbox_configuration.py**](delete_netbox_configuration.py) delete the Netbox configuration: 
    - all tenants
