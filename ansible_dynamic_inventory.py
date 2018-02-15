@@ -5,8 +5,8 @@
 
 ###################################################
 # usage: 
-python ansible_dynamic_inventory.py
-more hosts
+# python ansible_dynamic_inventory.py
+# more hosts
 ###################################################
 
 
