@@ -1,0 +1,3 @@
+vars_from_netbox_api:
+- address: 172.25.90.186/32
+  interface: vme0

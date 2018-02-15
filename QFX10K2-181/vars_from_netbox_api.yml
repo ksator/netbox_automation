@@ -1,0 +1,7 @@
+vars_from_netbox_api:
+- address: 10.0.2.15/31
+  interface: et-0/0/0
+- address: 10.0.2.25/31
+  interface: et-0/0/1
+- address: 172.25.90.181/32
+  interface: em0
