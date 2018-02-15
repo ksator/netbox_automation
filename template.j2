@@ -1,0 +1,18 @@
+interfaces {
+{% for item in vars_from_netbox_api %}
+    {{ item.interface }} {
+        unit 0 {
+            family inet {
+                address {{ item.address }};
+            }
+        }
+    }
+{% endfor %}
+}
+protocols {
+    lldp {
+{% for item in vars_from_netbox_api %}
+        interface "{{ item.interface }}";
+{% endfor %}
+    }
+}

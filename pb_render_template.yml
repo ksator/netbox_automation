@@ -1,0 +1,24 @@
+---
+ - name: create a directory 
+   hosts: localhost
+   gather_facts: no
+   
+   tasks:
+    
+   - name: create the directory render
+     file: 
+        path: "{{playbook_dir}}/render" 
+        state: directory
+
+ - name: render junos configuration template using vars from Netbox API
+   hosts: juniper
+   connection: local
+   gather_facts: no
+
+   tasks:
+
+    - name: render junos configuration template using vars from Netbox API
+      template: 
+        src: "{{ playbook_dir }}/template.j2" 
+        dest: "{{ playbook_dir }}/render/{{ inventory_hostname }}.conf"
+
