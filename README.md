@@ -7,6 +7,7 @@
 [**clone this repository**](README.md#clone-this-repository)  
 [**Define your variables**](README.md#define-your-variables)  
 [**Configure Netbox with automation**](README.md#configure-netbox-with-automation)  
+[**Dynamic ansible inventory from Netbox API**](README.md#dynamic-ansible-inventory-from-netbox-api)
 [**Delete Netbox configuration with automation**](README.md#delete-netbox-configuration-with-automation)  
 [**Looking for more automation solutions**](README.md#looking-for-more-automation-solutions)  
 
@@ -278,6 +279,55 @@ interface connection between QFX5100-183 et-0/0/48 and QFX10K2-178 et-0/0/2 succ
 interface connection between QFX10K2-181 et-0/0/3 and QFX5100-186 et-0/0/49 successfully created
 
 ```
+
+## Dynamic ansible inventory from Netbox API
+
+The script  [**ansible_dynamic_inventory.py**](ansible_dynamic_inventory.py) generates the ansible inventory [**hosts**](hosts) from Netbox API  
+
+```
+$ python ansible_dynamic_inventory.py
+```
+```
+$ more hosts 
+[juniper:children]
+qfx10002-36q
+qfx5100-48s-6q
+
+[qfx10002-36q]
+QFX10K2-174 junos_host=172.25.90.174
+QFX10K2-175 junos_host=172.25.90.175
+QFX10K2-178 junos_host=172.25.90.178
+QFX10K2-180 junos_host=172.25.90.180
+QFX10K2-181 junos_host=172.25.90.181
+
+[qfx5100-48s-6q]
+QFX5100-183 junos_host=172.25.90.183
+QFX5100-186 junos_host=172.25.90.186
+
+[dc1]
+[QFX10K2-178]
+[QFX10K2-180]
+[QFX10K2-181]
+[QFX5100-183]
+[QFX5100-186]
+
+[dc2]
+[QFX10K2-174]
+[QFX10K2-175]
+
+[leaf_switch]
+[QFX5100-183]
+[QFX5100-186]
+
+[spine_switch]
+[QFX10K2-174]
+[QFX10K2-175]
+[QFX10K2-178]
+[QFX10K2-180]
+[QFX10K2-181]
+
+```
+
 ## Delete Netbox configuration with automation
 The script [**delete_netbox_configuration.py**](delete_netbox_configuration.py) delete the Netbox configuration: 
    - all tenants
