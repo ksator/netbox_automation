@@ -121,3 +121,16 @@ ip_addresses:
     - ip: 10.0.2.19/31
       device: QFX10K2-178
       interface: et-0/0/1
+
+# define how the interfaces are connected (physical topology). 
+interface_connections:
+    - device_a: QFX5100-183
+      interface_a: et-0/0/48
+      device_b: QFX10K2-178
+      interface_b: et-0/0/2
+      connection_status: Connected
+    - device_a: QFX10K2-181
+      interface_a: et-0/0/3
+      device_b: QFX5100-186
+      interface_b: et-0/0/49
+      connection_status: Connected

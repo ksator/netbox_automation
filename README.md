@@ -85,6 +85,7 @@ On your laptop, edit it to indicate details such as:
    - prefixes
    - device management ip addresses
    - ip addresses to assign to devices interfaces
+   - interface connections (physical topology) 
    - In addition to this, there are others Netbox details that will be configured automatically: 
      - device-types (Juniper qfx5100-48s-6q and qfx10002-36q) 
      - a platform (Junos platform with a junos napalm_driver)
@@ -198,6 +199,18 @@ management_addresses:
       interface: em0
       mgmt_only: True
 
+# define how the interfaces are connected (physical topology). 
+interface_connections:
+    - device_a: QFX5100-183
+      interface_a: et-0/0/48
+      device_b: QFX10K2-178
+      interface_b: et-0/0/2
+      connection_status: Connected
+    - device_a: QFX10K2-181
+      interface_a: et-0/0/3
+      device_b: QFX5100-186
+      interface_b: et-0/0/49
+      connection_status: Connected
 ```
 ## Configure Netbox with automation
 ```
@@ -211,9 +224,9 @@ device type qfx5100-48s-6q successfully created
 device type qfx10002-36q successfully created
 prefix role out_of_band_management successfully created
 prefix role devices_interconnection successfully created
-prefix 10.0.102.0/24 successfully created
-prefix 172.25.190.0/24 successfully created
-platform junos successfully created
+prefix 10.0.2.0/24 successfully created
+prefix 172.25.90.0/24 successfully created
+platform junos with a junos napalm_driver successfully created
 device QFX5100-183 successfully created
 device QFX5100-186 successfully created
 device QFX10K2-178 successfully created
@@ -228,6 +241,15 @@ address ip 172.25.90.174 successfully created
 address ip 172.25.90.175 successfully created
 address ip 172.25.90.180 successfully created
 address ip 172.25.90.181 successfully created
+address ip 10.0.2.13/31 successfully created
+address ip 10.0.2.23/31 successfully created
+address ip 10.0.2.15/31 successfully created
+address ip 10.0.2.25/31 successfully created
+address ip 10.0.2.9/31 successfully created
+address ip 10.0.2.19/31 successfully created
+interface connection between QFX5100-183 et-0/0/48 and QFX10K2-178 et-0/0/2 successfully created
+interface connection between QFX10K2-181 et-0/0/3 and QFX5100-186 et-0/0/49 successfully created
+
 ```
 ## Delete Netbox configuration with automation
 The script [**delete_netbox_configuration.py**](delete_netbox_configuration.py) delete the Netbox configuration: 
@@ -236,6 +258,7 @@ The script [**delete_netbox_configuration.py**](delete_netbox_configuration.py) 
    - all device-roles
    - all device-types
    - all platforms
+   - all interface connections
    - all devices
    - all prefixes-roles
    - all prefixes

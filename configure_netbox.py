@@ -110,7 +110,7 @@ def create_platform():
  rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
  #pprint (rest_call.json())
  if rest_call.status_code == 201:
-     print 'platform junos successfully created'
+     print 'platform junos with a junos napalm_driver successfully created'
  else:
      print 'failed to create platform junos'
 
@@ -374,6 +374,26 @@ def get_interface_id(interface, device):
     #print "interface_id is " + str(interface_id)
     return interface_id
 
+def create_interface_connections():
+    url=url_base + 'api/dcim/interface-connections/'
+    for item in my_variables_in_yaml['interface_connections']:
+     device_a=item['device_a']
+     device_b=item['device_b']
+     interface_a=item['interface_a']
+     interface_b=item['interface_b']
+     interface_a_id = get_interface_id(interface_a, device_a)
+     interface_b_id = get_interface_id(interface_b, device_b)
+     payload={
+           "connection_status": True,
+           "interface_b": interface_b_id,
+           "interface_a": interface_a_id
+     }
+     rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
+     if rest_call.status_code == 201:
+         print 'interface connection between ' + item['device_a'] + ' ' + item['interface_a'] + ' and ' + item['device_b'] + ' ' + item['interface_b']  + ' successfully created'
+     else:
+         print 'failed to create interface connection ' + item
+
 
 ######################################################
 # this block is the Netbox configuration using REST calls
@@ -435,3 +455,5 @@ enable_management_ip_address()
 #get_device_details('QFX5100-183')
 
 create_ip_addresses('ip_addresses')
+
+create_interface_connections()

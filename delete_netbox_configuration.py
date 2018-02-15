@@ -50,6 +50,17 @@ def delete_ip_addresses():
   url=url_base + 'api/ipam/ip-addresses/' + str(id) + '/'
   rest_call = requests.delete(url, headers=headers)
 
+def delete_interface_connections(): 
+    url=url_base + 'api/dcim/interface-connections/'
+    rest_call = requests.get(url, headers=headers)
+    for item in rest_call.json()['results']:
+       id=item['id']
+       url=url_base + 'api/dcim/interface-connections/' + str(id) + '/'
+       rest_call = requests.delete(url, headers=headers)
+
+
+######################################################
+
 def delete_devices():
  url=url_base + 'api/dcim/devices'
  rest_call = requests.get(url, headers=headers)
@@ -120,6 +131,8 @@ def delete_platforms():
 ######################################################
 
 delete_ip_addresses()
+
+delete_interface_connections()
 
 delete_devices()
 
