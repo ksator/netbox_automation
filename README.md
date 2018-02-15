@@ -493,10 +493,14 @@ QFX5100-186                : ok=2    changed=0    unreachable=0    failed=0
 
 The script [**generate_vars_for_jinja_from_netbox.py**](generate_vars_for_jinja_from_netbox.py) generates yaml files for jinja templates and ansible playbooks from Netbox API. 
 
+
+There is no variable available: 
 ```
 # ls host_vars
 ls: cannot access 'host_vars': No such file or directory
 ```
+
+Generate the variables: 
 ```
 # python generate_vars_for_jinja_from_netbox.py
 ```
@@ -523,6 +527,45 @@ vars_from_netbox_api:
   interface: et-0/0/1
 - address: 172.25.90.178/32
   interface: em0
+```
+Use the generated variables: 
+```
+# ansible-playbook pb_check_interfaces.yml
+
+PLAY [check interface states] *******************************************************************************************************************************************
+
+TASK [check if interfaces admin status is up] ***************************************************************************************************************************
+ok: [QFX10K2-174] => (item={u'interface': u'em0', u'address': u'172.25.90.174/32'})
+ok: [QFX10K2-175] => (item={u'interface': u'em0', u'address': u'172.25.90.175/32'})
+ok: [QFX10K2-180] => (item={u'interface': u'et-0/0/0', u'address': u'10.0.2.13/31'})
+ok: [QFX10K2-178] => (item={u'interface': u'et-0/0/0', u'address': u'10.0.2.9/31'})
+ok: [QFX10K2-181] => (item={u'interface': u'et-0/0/0', u'address': u'10.0.2.15/31'})
+ok: [QFX10K2-180] => (item={u'interface': u'et-0/0/1', u'address': u'10.0.2.23/31'})
+ok: [QFX10K2-181] => (item={u'interface': u'et-0/0/1', u'address': u'10.0.2.25/31'})
+ok: [QFX10K2-178] => (item={u'interface': u'et-0/0/1', u'address': u'10.0.2.19/31'})
+ok: [QFX10K2-180] => (item={u'interface': u'em0', u'address': u'172.25.90.180/32'})
+ok: [QFX10K2-181] => (item={u'interface': u'em0', u'address': u'172.25.90.181/32'})
+ok: [QFX10K2-178] => (item={u'interface': u'em0', u'address': u'172.25.90.178/32'})
+
+TASK [check if interfaces op status is up] ******************************************************************************************************************************
+ok: [QFX10K2-174] => (item={u'interface': u'em0', u'address': u'172.25.90.174/32'})
+ok: [QFX10K2-175] => (item={u'interface': u'em0', u'address': u'172.25.90.175/32'})
+ok: [QFX10K2-178] => (item={u'interface': u'et-0/0/0', u'address': u'10.0.2.9/31'})
+ok: [QFX10K2-181] => (item={u'interface': u'et-0/0/0', u'address': u'10.0.2.15/31'})
+ok: [QFX10K2-180] => (item={u'interface': u'et-0/0/0', u'address': u'10.0.2.13/31'})
+ok: [QFX10K2-178] => (item={u'interface': u'et-0/0/1', u'address': u'10.0.2.19/31'})
+ok: [QFX10K2-180] => (item={u'interface': u'et-0/0/1', u'address': u'10.0.2.23/31'})
+ok: [QFX10K2-181] => (item={u'interface': u'et-0/0/1', u'address': u'10.0.2.25/31'})
+ok: [QFX10K2-178] => (item={u'interface': u'em0', u'address': u'172.25.90.178/32'})
+ok: [QFX10K2-180] => (item={u'interface': u'em0', u'address': u'172.25.90.180/32'})
+ok: [QFX10K2-181] => (item={u'interface': u'em0', u'address': u'172.25.90.181/32'})
+
+PLAY RECAP **************************************************************************************************************************************************************
+QFX10K2-174                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-175                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-178                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-180                : ok=2    changed=0    unreachable=0    failed=0   
+QFX10K2-181                : ok=2    changed=0    unreachable=0    failed=0   
 ```
 
 ## Delete Netbox configuration with automation
