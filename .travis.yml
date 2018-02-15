@@ -20,6 +20,7 @@ script:
   - python -m py_compile configure_netbox.py
   - python -m py_compile ansible_dynamic_inventory.py  
   - ansible-playbook pb_print_junos_facts.yml --syntax-check
+  - python -m py_compile generate_vars_for_jinja_from_netbox.py
   - ansible-playbook pb_check_interfaces.yml --syntax-check
   - python -m py_compile delete_netbox_configuration.py
 
