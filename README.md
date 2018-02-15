@@ -529,6 +529,10 @@ vars_from_netbox_api:
   interface: em0
 ```
 Use the generated variables: 
+The playbook [**pb_check_interfaces.yml**](pb_check_interfaces.yml) uses: 
+- the ansible inventory we generated from Netbox API
+- the variables we generated from Netbox API 
+
 ```
 # ansible-playbook pb_check_interfaces.yml
 
