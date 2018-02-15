@@ -72,12 +72,21 @@ cd netbox_automation
 
 ## Define your variables
 
-The file [variables.yml](variables.yml) defines variables.
+The file [**variables.yml**](variables.yml) defines variables.
 On your laptop, edit it to indicate details such as:
-
 - The IP address of your Netbox server
 - The Netbox user token you want to use
-- The Netbox details you want to configure (tenant, sites, device-roles, device-types, devices, prefixes-roles, prefixes, ....)
+- The Netbox details you want to configure with automation: 
+   - a tenant
+   - sites
+   - device-roles
+   - device-types
+   - devices
+   - prefixes-roles
+   - prefixes
+   - device management ip addresses
+   - ip addresses to assign to devices interfaces
+   - on some other details
 
 Run these commands on your laptop:
 ```
@@ -220,6 +229,15 @@ address ip 172.25.90.180 successfully created
 address ip 172.25.90.181 successfully created
 ```
 ## Delete Netbox configuration with automation
+The script [**delete_netbox_configuration.py**](delete_netbox_configuration.py) delete the Netbox configuration: 
+   - all tenants
+   - all sites
+   - all device-roles
+   - all device-types
+   - all devices
+   - all prefixes-roles
+   - all prefixes
+   - all ip addresses
 ```
 $ python delete_netbox_configuration.py 
 ```
