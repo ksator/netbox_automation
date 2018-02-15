@@ -1,0 +1,37 @@
+---
+ - name: check interface states
+   hosts: qfx10002-36q
+   connection: local
+   gather_facts: no
+
+   tasks:
+
+   - name: check if interfaces admin status is up
+     junos_command:
+      provider: "{{ credentials }}"
+      display: 'xml'
+      commands:
+       - "show interfaces terse {{ item.interface }}"
+      waitfor:
+       - "result[0]['rpc-reply']['interface-information']['physical-interface']['admin-status'] eq up"
+      retries: 3
+      interval: 3
+     with_items:
+     - "{{ vars_from_netbox_api }}"
+     when: (ansible_version['major'] == 2 and ansible_version['minor']|int >= 4)
+
+
+   - name: check if interfaces op status is up
+     junos_command:
+      provider: "{{ credentials }}"
+      display: 'xml'
+      commands:
+       - "show interfaces terse {{ item.interface }}"
+      waitfor:
+       - "result[0]['rpc-reply']['interface-information']['physical-interface']['oper-status'] eq up"
+      retries: 3
+      interval: 3
+     with_items:
+     - "{{ vars_from_netbox_api }}"
+     when: (ansible_version['major'] == 2 and ansible_version['minor']|int >= 4)
+
