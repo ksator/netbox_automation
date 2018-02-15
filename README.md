@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ksator/netbox_automation.svg?branch=master)](https://travis-ci.org/ksator/netbox_automation)
+
 ## Documentation structure
 [**About Netbox**](README.md#about-netbox)  
 [**About this repo**](README.md#about-this-repo)  
@@ -9,6 +11,7 @@
 [**Configure Netbox with automation**](README.md#configure-netbox-with-automation)  
 [**Generate the ansible inventory from Netbox API**](README.md#generate-the-ansible-inventory-from-netbox-api)  
 [**Delete Netbox configuration with automation**](README.md#delete-netbox-configuration-with-automation)  
+[**Continuous integration with Travis CI**](README.md#continuous-integration-with-travis-ci)  
 [**Looking for more automation solutions**](README.md#looking-for-more-automation-solutions)  
 
 
@@ -497,6 +500,16 @@ The script [**delete_netbox_configuration.py**](delete_netbox_configuration.py) 
 ```
 $ python delete_netbox_configuration.py 
 ```
+
+## Continuous integration with Travis CI
+
+There is a github webhook with Travis CI
+The syntax of the python scripts and ansible playbooks in this repository are tested automatically by Travis CI. 
+The files [**.travis.yml**](.travis.yml) and [**requirements.txt**](requirements.txt) at the root of this repository are used for this.
+
+Here's the last build status Build Status
+[![Build Status](https://travis-ci.org/ksator/netbox_automation.svg?branch=master)](https://travis-ci.org/ksator/netbox_automation)
+
 
 ## Looking for more automation solutions
 
