@@ -89,7 +89,7 @@ for site in rest_call_get_sites.json()['results']:
     rest_call_get_devices = requests.get(url, headers=headers)
     for device in rest_call_get_devices.json()['results']:
         device_name = device['name']
-        ansible_inventory_file.write("[" + device_name + "]\n")
+        ansible_inventory_file.write(device_name + "\n")
     ansible_inventory_file.write("\n")
 
 url= url_base + 'api/dcim/device-roles/'
@@ -101,7 +101,7 @@ for role in rest_call_get_roles.json()['results']:
     rest_call_get_devices = requests.get(url, headers=headers)
     for device in rest_call_get_devices.json()['results']:
         device_name = device['name']
-        ansible_inventory_file.write("[" + device_name + "]\n")
+        ansible_inventory_file.write(device_name + "\n")
     ansible_inventory_file.write("\n")
 
 ansible_inventory_file.close()
