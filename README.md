@@ -54,6 +54,7 @@ The steps are:
 - To configure Netbox, execute the script [**configure_netbox.py**](configure_netbox.py). 
    - It uses the variables defined in the file [**variables.yml**](variables.yml) and configure Netbox 
 - To generate an Ansible inventory file from Netbox API, execute the script [**ansible_dynamic_inventory.py**](ansible_dynamic_inventory.py)
+- To generate yaml files for jinja templates and ansible playbooks from Netbox API, execute the script [**generate_vars_for_jinja_from_netbox.py**](generate_vars_for_jinja_from_netbox.py)   
 - To delete Netbox configuration, execute the script [**delete_netbox_configuration.py**](delete_netbox_configuration.py)
 
 ## Netbox Installation
