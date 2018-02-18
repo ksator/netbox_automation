@@ -24,7 +24,7 @@ device-roles:
 # device-types qfx5100-48s-6q and qfx10002-36q are automatically created. 
 # interface_templates are automatically created for device-types qfx5100-48s-6q and qfx10002-36q
 # power_port_templates are automatically created for device-types qfx5100-48s-6q and qfx10002-36q
-# Juniper Junos platform is be automatically created with a junos napalm_driver
+# Juniper Junos platform is automatically created with a junos napalm_driver
 
 # prefix roles you want to create
 prefix_roles: 
