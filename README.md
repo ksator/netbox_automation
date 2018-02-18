@@ -36,7 +36,7 @@ So this new repo is about:
 -	ansible inventory file generated with automation from Netbox API   
 -	yaml files (variables) for Jinja templates or ansible playbooks generated with automation from Netbox API 
 
-This repository doesnt install Netbox. You still need to install Netbox yourself.
+This repository doesn’t install Netbox. You still need to install Netbox yourself.
 
 This repository has been tested using: 
 - Ubuntu 16.04
@@ -47,12 +47,12 @@ This repository has been tested using:
 
 The steps are:  
 - Install Netbox. 
-   - This repository doesnt install Netbox. You still need to install Netbox yourself.  
+   - This repository doesn’t install Netbox. You still need to install Netbox yourself.  
 - Install the requirements to use the python scripts hosted in this repository  
 - Clone this repository
 - Edit the file [**variables.yml**](variables.yml) to indicate what you want to configure on Netbox
 - To configure Netbox, execute the script [**configure_netbox.py**](configure_netbox.py). 
-   - It uses the variables defined in the file [**variables.yml**](variables.yml) and configure Netbox 
+   - It uses the variables defined in the file [**variables.yml**](variables.yml) and configures Netbox 
 - To generate an Ansible inventory file from Netbox API, execute the script [**ansible_dynamic_inventory.py**](ansible_dynamic_inventory.py)
 - To generate yaml files for jinja templates and ansible playbooks from Netbox API, execute the script [**generate_vars_for_jinja_from_netbox.py**](generate_vars_for_jinja_from_netbox.py)   
 - To delete Netbox configuration, execute the script [**delete_netbox_configuration.py**](delete_netbox_configuration.py)
@@ -66,11 +66,11 @@ Once netbox is installed, you can use it:
 - netbox API http://your_netbox_server/api/
 - netbox API doc http://your_netbox_server/api/docs/
 
-This repository use Netbox REST API. So you need to create a Netbox API Token. 
+This repository uses Netbox REST API. So you need to create a Netbox API Token. 
 
 
 ## install the requirements to use the automation content hosted in this repository  
-The python scripts  hosted in this repository use the library **requests** to makes REST calls to Netbox.   
+The python scripts hosted in this repository use the library **requests** to make REST calls to Netbox.   
 Run these commands on your laptop:
 ```
 sudo -s
@@ -137,7 +137,7 @@ device-roles:
 # device-types qfx5100-48s-6q and qfx10002-36q are automatically created. 
 # interface_templates are automatically created for device-types qfx5100-48s-6q and qfx10002-36q
 # power_port_templates are automatically created for device-types qfx5100-48s-6q and qfx10002-36q
-# Juniper Junos platform is be automatically created with a junos napalm_driver
+# Juniper Junos platform is automatically created with a junos napalm_driver
 
 # prefix roles you want to create
 prefix_roles: 
@@ -183,7 +183,7 @@ devices:
       device_role: spine_switch
       site: dc2
     
-# management ip addresses you want to create. the IP addresses are assigned to the tenant.
+# management ip addresses you want to create. The IP addresses are assigned to the tenant.
 management_addresses: 
     - ip: 172.25.90.183
       device: QFX5100-183
@@ -214,7 +214,7 @@ management_addresses:
       interface: em0
       mgmt_only: True
 
-# Other ip addresses you want to create. the IP addresses are assigned to the tenant.
+# Other ip addresses you want to create. The IP addresses are assigned to the tenant.
 ip_addresses:
     - ip: 10.0.2.13/31
       device: QFX10K2-180
@@ -250,7 +250,7 @@ interface_connections:
 ```
 ## Configure Netbox with automation
 
-The script [**configure_netbox.py**](configure_netbox.py) configure Netbox using the file [**variables.yml**](variables.yml) 
+The script [**configure_netbox.py**](configure_netbox.py) configures Netbox using the file [**variables.yml**](variables.yml) 
 
 ```
 $ python configure_netbox.py 
