@@ -173,7 +173,7 @@ def get_device_type_id(model):
 
 def create_interface_templates_for_qfx5100_48s_6q():
     url=url_base + 'api/dcim/interface-templates/'
-    for item in range (0, 47): 
+    for item in range (0, 48): 
         payload={
             "device_type": get_device_type_id('qfx5100-48s-6q'),
             "name": "xe-0/0/" + str(item),
@@ -182,7 +182,7 @@ def create_interface_templates_for_qfx5100_48s_6q():
         }
         rest_call = requests.post(url, headers=headers, data=json.dumps(payload))
         #pprint (rest_call.json())
-    for item in range (48, 53): 
+    for item in range (48, 54): 
         payload={
             "device_type": get_device_type_id('qfx5100-48s-6q'),
             "name": "et-0/0/" + str(item),
@@ -212,7 +212,7 @@ def create_power_port_templates(model):
 
 def create_interface_templates_for_qfx10002_36q():
     url=url_base + 'api/dcim/interface-templates/'
-    for item in range (0, 31): 
+    for item in range (0, 36): 
         payload={
             "device_type": get_device_type_id('qfx10002-36q'),
             "name": "et-0/0/" + str(item),
